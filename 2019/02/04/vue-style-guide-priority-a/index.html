@@ -5,15 +5,19 @@
   
 
   
-  <title>Hexo</title>
+  <title>Vue代码规范 -- 基础篇[译] | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="这是Vue具体代码的官方风格指南。如果你在项目中使用Vue，为了避免错误，小纠结，和反模式，这是一份很好的指导。然而，我们不相信任何风格指导对所有团队和项目是理想的，所以我们鼓励基于过去的经验，围绕着技术栈和个人的价值观做有意义的的偏差。 很大程度上，我们也总体上避免就JavaScript或HTML提出建议。我们不介意你使用分号还是逗号。我们不介意你对于HTML的属性值使用单引号还是双引号。一些特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue代码规范 -- 基础篇[译]">
+<meta property="og:url" content="http://yoursite.com/2019/02/04/vue-style-guide-priority-a/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这是Vue具体代码的官方风格指南。如果你在项目中使用Vue，为了避免错误，小纠结，和反模式，这是一份很好的指导。然而，我们不相信任何风格指导对所有团队和项目是理想的，所以我们鼓励基于过去的经验，围绕着技术栈和个人的价值观做有意义的的偏差。 很大程度上，我们也总体上避免就JavaScript或HTML提出建议。我们不介意你使用分号还是逗号。我们不介意你对于HTML的属性值使用单引号还是双引号。一些特">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-05T06:18:54.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Vue代码规范 -- 基础篇[译]">
+<meta name="twitter:description" content="这是Vue具体代码的官方风格指南。如果你在项目中使用Vue，为了避免错误，小纠结，和反模式，这是一份很好的指导。然而，我们不相信任何风格指导对所有团队和项目是理想的，所以我们鼓励基于过去的经验，围绕着技术栈和个人的价值观做有意义的的偏差。 很大程度上，我们也总体上避免就JavaScript或HTML提出建议。我们不介意你使用分号还是逗号。我们不介意你对于HTML的属性值使用单引号还是双引号。一些特">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-vue-style-guide-priority-a" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-vue-style-guide-priority-a" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/04/vue-style-guide-priority-a/" class="article-date">
   <time datetime="2019-02-04T10:54:57.065Z" itemprop="datePublished">2019-02-04</time>
@@ -75,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/04/vue-style-guide-priority-a/">Vue代码规范 -- 基础篇[译]</a>
+    <h1 class="article-title" itemprop="name">
+      Vue代码规范 -- 基础篇[译]
     </h1>
   
 
@@ -233,56 +235,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/04/hello-world/" class="article-date">
-  <time datetime="2019-02-04T03:29:39.156Z" itemprop="datePublished">2019-02-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/04/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2019/02/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/04/hello-world/" data-id="cjrq4hx4l0000elxsu4pw3t00" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
