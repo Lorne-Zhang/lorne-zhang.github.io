@@ -254,6 +254,272 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/10/05/vuex-state-management/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/05/vuex-state-management/" itemprop="url">Vue系列 | Vuex状态管理器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-05T11:10:22+08:00">
+                2019-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="What-什么是Vuex"><a href="#What-什么是Vuex" class="headerlink" title="What 什么是Vuex"></a>What 什么是Vuex</h2><p>官方的定义是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vuex is a state management pattern + library for Vue.js applications.</span><br></pre></td></tr></table></figure></p>
+<p>显然它是Vue官方为Vue.js提供的库，功能是<strong>数据状态管理</strong>。它是在一个应用的层级对所有组件做集中状态管理的工具。来看一下Vuex在应用中的结构：<br><img src="/2019/10/05/vuex-state-management/state-manage-pattern.png" alt="Alt text"></p>
+<p>定义中提到了<strong>state management pattern</strong>，即状态管理模式，那问题就来了为什么需要这种设计模式呢，普通的模式什么样呢，多加一层有什么好处呢，软件开发中有一条不成文的规律：多加一层。难度就下降一倍。我们来看看这样的设计是否达到了这样的效果。</p>
+<p>我们来看一下正常情况下的模式：<br><img src="/2019/10/05/vuex-state-management/image.png" alt="Alt text"><br>即所谓的<strong>State–View–Action</strong>模式：</p>
+<p>这是一个简化的自包含系统，遵循单向数据流的核心原则。</p>
+<p><strong>View</strong>：用于接收用户输入</p>
+<p><strong>Actions</strong>：响应用户输入来改变状态</p>
+<p><strong>State</strong>：接收用户数据，并把数据传递到View层来显示</p>
+<p>然而当多个View共享一个State时，这种平衡被破坏了。</p>
+<ul>
+<li>多个view可能依赖相同的state</li>
+<li>Actions来自不同的View需要改变相同的state<br>对于问题一， 如果是层级嵌套的组件View的状态更新我们可以通过props来传递，但是层级过多的时候很麻烦而同级组件不起作用。<br>对于问题二，我们经常需要查询父子空间的应用重新存储State，或通过事件来更改和同步多个使用状态的地方，会导致代码脆弱，不可维护。</li>
+</ul>
+<p>基于以上原因，我们抽象出了图一所谓的状态管理模式，即：把共享的状态取出来，变成一个全局单例。无论是访问状态还是追踪改变，都通过这个单例进行。</p>
+<p>这就是Vuex背后的核心思想，通过定义和分离状态管理的概念，使views和states保持了独立，从而给了我们更多的代码结构和维护性。</p>
+<p>Vuex是专门为Vue.js定制开发的，利用的Vue.js的响应式系统和高效更新的优势，是Vue项目下状态管理插件的首选。</p>
+<h2 id="Why-为什么要使用Vuex"><a href="#Why-为什么要使用Vuex" class="headerlink" title="Why 为什么要使用Vuex"></a>Why 为什么要使用Vuex</h2><p>其实有时候知道了what，我们也就知道了why。自己定义一个全局的单例貌似也可以实现同样的效果，我们来具体说说为什么Vuex和全局单例是不同的：</p>
+<ol>
+<li>Vuex作为应用的存储中心，它的数据是响应式的。如果状态发生改变，界面会进行高效自动更新。</li>
+<li>你并不能够直接改变存储的状态，我们其实是通过committing mutations的声明来改变状态的，这使得我们的改变是可以被如<strong>devtools</strong>工具追踪到，有助于bug调试。</li>
+</ol>
+<h3 id="When-何时使用"><a href="#When-何时使用" class="headerlink" title="When 何时使用"></a>When 何时使用</h3><p>Vuex虽然帮我们共享了状态管理，但也额外引入了更多的概念和样板文件。如果你的应用比较简单，你就用<a href="https://vuejs.org/v2/guide/state-management.html#Simple-State-Management-from-Scratch" target="_blank" rel="noopener">store pattern</a>,一种追踪变化和实时响应的存储模式。如果你是中大型项目，尤其是跨层级的组件间共享状态你自然可以尝试Vuex。</p>
+<h2 id="How-如何使用"><a href="#How-如何使用" class="headerlink" title="How 如何使用"></a>How 如何使用</h2><ol>
+<li>安装<code>npm install vuex --save</code></li>
+<li><p>引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import Vuex from &apos;vuex&apos;</span><br><span class="line">Vue.use(Vuex)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个存储实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: 0,</span><br><span class="line">        todos: [</span><br><span class="line">            &#123; id: 1, text: &apos;...&apos;, done: true &#125;,</span><br><span class="line">            &#123; id: 2, text: &apos;...&apos;, done: false&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment (state, n) &#123;</span><br><span class="line">            state.count += n</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        increment(&#123;commit&#125;) &#123;</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                commit(&apos;increment&apos;, 2)</span><br><span class="line">            &#125;,3000)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        doneTodos: state =&gt; &#123;</span><br><span class="line">            return state.todos.filter(todo =&gt; todo.done)</span><br><span class="line">        &#125;,</span><br><span class="line">        doneTodosCount: (state, getters) =&gt; &#123;</span><br><span class="line">            return getters.doneTodos.length</span><br><span class="line">        &#125;,</span><br><span class="line">        getTodoById: (state) =&gt; (id) =&gt; &#123;</span><br><span class="line">            return state.todos.find(todo =&gt; todo.id === id)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>大家看到上面声明了一些对象关键字如<code>state</code>、<code>mutations</code>、<code>getters</code>，先别急，后面我们一个一个讲清楚。</p>
+<ol start="4">
+<li><p>挂载到Vue实例下面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// main.js 入口文件</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App),</span><br><span class="line">&#125;).$mount(&apos;#app&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在其他组件中使用</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// App.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;&#123;  count &#125;&#125;</span><br><span class="line">      &lt;button @click=&quot;$store.commit(&apos;increment&apos;,2)&quot;&gt;count++&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;$store.dispatch(&apos;increment&apos;)&quot;&gt;count++&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">              &lt;span&gt;</span><br><span class="line">                  doneTodos:</span><br><span class="line">              &lt;/span&gt;</span><br><span class="line">        &#123;&#123; $store.getters.doneTodos &#125;&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">              &lt;span&gt;</span><br><span class="line">                  doneTodosCount:</span><br><span class="line">              &lt;/span&gt;</span><br><span class="line">        &#123;&#123; doneTodosCount &#125;&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">              &lt;span&gt;</span><br><span class="line">                  getTodoById(2):</span><br><span class="line">              &lt;/span&gt;</span><br><span class="line">        &#123;&#123; $store.getters.getTodoById(2) &#125;&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &apos;app&apos;,</span><br><span class="line">        computed: &#123;</span><br><span class="line">            count () &#123;</span><br><span class="line">                return this.$store.state.count</span><br><span class="line">            &#125;,</span><br><span class="line">            doneTodosCount () &#123;</span><br><span class="line">                return this.$store.getters.doneTodosCount</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><p><code>State</code>是一个全局唯一的状态树</p>
+<p><strong>如何在Vue组件中获取Vuex的状态</strong></p>
+<p>方法一：由于state的存储是响应式的，所以我们可以在合适的计算属性里使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">const Counter = &#123;</span><br><span class="line">  template: `&lt;div&gt; &#123;&#123; count &#125;&#125;&lt;/div&gt;`,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count () &#123;</span><br><span class="line">      return store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el:&apos;#example&apos;,</span><br><span class="line">  components: &#123;Counter&#125;,</span><br><span class="line">  template:`&lt;counter&gt;&lt;/counter&gt;`</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>进一步优化</strong></p>
+<p>这样每当在其他组件使用的时候，我们都需要导入store，Vue为我们提供了一个store操作符，可以全局注入所有的子组件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const Counter = &#123;</span><br><span class="line">  template: `&lt;div&gt; &#123;&#123; count &#125;&#125;&lt;/div&gt;`,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count () &#123;</span><br><span class="line">      return this.$store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el:&apos;#example&apos;,</span><br><span class="line">  store,</span><br><span class="line">  components: &#123;Counter&#125;,</span><br><span class="line">  template:`&lt;counter&gt;&lt;/counter&gt;`</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>在创建Vue根实例的时候声明<code>store</code>，而后使用<code>this.$store</code>的方式访问。</p>
+<blockquote>
+<p>注意：<br>我这里是通过<code>&lt;script&gt;</code>标签对导入的Vuex，如果你是通过包管理工具下载而后通过import命令导入的包，还需要声明Vue.use(Vuex)</p>
+</blockquote>
+<p><strong>mapState 助手</strong></p>
+<p>在组件中访问多个属性或getters的时候，它可以帮我们简化写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapState &#125;  from &apos;vuex&apos;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      localCount: 5</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: mapState(&#123;</span><br><span class="line">    // 可以使用箭头函数访问</span><br><span class="line">    count: state =&gt; state.count,</span><br><span class="line">    // 给count起一个别名</span><br><span class="line">    countAlias: &apos;count&apos;,</span><br><span class="line">    // 当使用本地数据的时候必须使用函数</span><br><span class="line">    countPlusLocalState (state) &#123;</span><br><span class="line">      return state.count + this.localCount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在被映射的计算属性和state的子树名称相同时，可以传递一个字符串数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">computed: mapState([</span><br><span class="line">  &apos;count&apos;</span><br><span class="line">])</span><br></pre></td></tr></table></figure></p>
+<p><strong>对象拓展运算符</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  localComputed () &#123; return 1 &#125;,</span><br><span class="line">  ...mapState(&#123;</span><br><span class="line">    count: state =&gt; state.count</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以将mapState返回的对象结合其他的本地属性使用。</p>
+<h3 id="Getters"><a href="#Getters" class="headerlink" title="Getters"></a>Getters</h3><p>有时候我们需要基于state做一些计算，例如从一个代办事项里过滤已经做完的事情：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  doneTodosCount () &#123;</span><br><span class="line">    return this.$store.state.todos.filter(todo =&gt; todo.done).length</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果多个地方用到这个功能，我们需要写多个函数或取出封装为一个公共组件在其他函数里导入，都不是好主意。</p>
+<p>getters相当于Vue组件的计算属性，可以缓存它的依赖数据，当依赖改变的时候才会重新计算:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 0,</span><br><span class="line">    todos:[</span><br><span class="line">      &#123;id: 1, text:&apos;...&apos;, done:true&#125;,</span><br><span class="line">      &#123;id: 2, text:&apos;...&apos;, done: false&#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    doneTodos: state =&gt; &#123;</span><br><span class="line">      return state.todos.filter(todo =&gt; todo.done)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>怎么访问Getters</strong></p>
+<ol>
+<li><strong>属性方式访问</strong></li>
+</ol>
+<p>getters通过<code>store.getters</code>返回对象，所以我们可以直接在组件中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    doneTodos() &#123;</span><br><span class="line">      return this.$store.getters.doneTodos // [ &#123; &quot;id&quot;: 1, &quot;text&quot;: &quot;...&quot;, &quot;done&quot;: true &#125; ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>getters可以接收其他的getters作为第二个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">  doneTodos: state =&gt; &#123;</span><br><span class="line">    return state.todos.filter(todo =&gt; todo.done)</span><br><span class="line">  &#125;,</span><br><span class="line">  doneTodosCount: (state, getters) =&gt; &#123;</span><br><span class="line">    return getters.doneTodos.length  // 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li><strong>方法方式访问</strong></li>
+</ol>
+<p>我们可以返回一个函数，这在查询数组的时候尤其有用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getTodoById: (state) =&gt; (id) =&gt; &#123;</span><br><span class="line">  return state.todos.find(todo =&gt; todo.id === id)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.getters.getTodoById(2) //  &#123; &quot;id&quot;: 2, &quot;text&quot;: &quot;...&quot;, &quot;done&quot;: false &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<br>通过方法调用没办法缓存，每一次都会重新计算</p>
+</blockquote>
+<h3 id="mapGetters助手"><a href="#mapGetters助手" class="headerlink" title="mapGetters助手"></a>mapGetters助手</h3><p>它负责把store getters映射到本地属性，所以使用时代码我们可以简化如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ...mapGetters([</span><br><span class="line">    &apos;doneTodos&apos;,</span><br><span class="line">    &apos;doneTodosCount&apos;</span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以用以下方式起一个别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...mapGetters(&#123;</span><br><span class="line">  doneCount: &apos;doneTodosCount&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>mutations其实是Vuex里面改变state的唯一方式，也就是说你必须通过提交一个mutation来改变state的状态，不能直接操作state。它和事件比较像，有一个字符串的类型和一个处理器，这个处理器函数来执行实际state的改变。它接收state作为第一个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	 state: &#123;</span><br><span class="line">	   count: 0</span><br><span class="line">	 &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">    increment (state) &#123;</span><br><span class="line">      state.count ++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是你不能直接调用它，它更像是一个事情注册，当类型为<code>increment</code>的mutation函数被触发时，调用这个处理器。为了调用这个处理器，我们需要使用<code>store.commit(&#39;increment&#39;)</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"> &lt;div&gt;</span><br><span class="line">     &lt;button @click=&quot;$store.commit(&apos;increment&apos;)&quot;&gt;++&lt;/button&gt; // 1</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用Payload</strong></p>
+<p>你可以传递给<code>store.commit</code>一个额外的参数，payload将会被调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  increment (state, n) &#123;</span><br><span class="line">    state.count += n</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;$store.commit(&apos;increment&apos;,2)&quot;&gt;++&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p>一般payload可能包含多个字段，这样的话我们可以更具体的访问：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  increment (state, payload) &#123;</span><br><span class="line">    state.count += payload.amount</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;$store.commit(&apos;increment&apos;,&#123;amount: 2&#125;)&quot;&gt;++&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>对象方式提交</strong></p>
+<p>我们可以采用对象方式提交：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.commit(&#123;type:&apos;increment&apos;, amount: 2&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>此时，整个对象会被传递给payload，所以，mutation的处理方式是相同的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  increment (state, payload) &#123;</span><br><span class="line">    state.count += payload.amount</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>对于mutation的类型使用常量</strong></p>
+<p>对于mutation的类型我们可以使用常量，这样的话可以使用语法高亮，不容易拼写错误，而且把他们单独放在一个文件中，对于团队开发会比较方便，直接能在一个文件里面看到所有的mutation，这是一个常见的使用惯例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// mution-type.js</span><br><span class="line">export  const INCREMENT = &apos;increment&apos;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; INCREMENT &#125; from &apos;./mutaion-types&apos;</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    [INCREMENT] (state, payload) &#123;</span><br><span class="line">      state.count += payload.amount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Mutations必须是同步的</strong></p>
+<p>由于<code>devtools</code>里面调试时需要抓取state改变前后的对比数据，但是异步函数不知道什么时候调用完成，所以没有办法追踪。</p>
+<p><strong>在组件中使用Mutations</strong></p>
+<p>我们可以使用this.$store.commit(‘xxxx’)来正常提交，也可以使用<code>mapMutations</code>助手(必须把store注入根节点)做映射：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  [INCREMENT] (state,payload) &#123;</span><br><span class="line">    state.count += payload.amount</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line"> &lt;button @click=&quot;increment(&#123;amount: 3&#125;)&quot;&gt;++&lt;/button&gt;</span><br><span class="line">// JS</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations([</span><br><span class="line">      &apos;increment&apos;</span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>还可以设置别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line"> &lt;button @click=&quot;add(&#123;amount: 3&#125;)&quot;&gt;++&lt;/button&gt;</span><br><span class="line">// JS</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">      add: &apos;increment&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><p>为异步操作而生</p>
+<ul>
+<li>提交操作给mutations而不是直接改变state</li>
+<li>可以执行任何异步操作</li>
+</ul>
+<p>先看一段声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  increment (context) &#123;</span><br><span class="line">    context.commit(&apos;increment&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>context</code>包括了所有store上下文的所有方法和属性，所以他可以访问<code>context.commit</code>,<code>context.getters</code>,<code>context.state</code>。</p>
+<p>在实践中我们使用ES2015的<a href="https://github.com/lukehoban/es6features#destructuring" target="_blank" rel="noopener">参数解构</a>来简化我们的代码，尤其是需要调用commit多次时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  increment (&#123;commit&#125;) &#123;</span><br><span class="line">   commit(&apos;increment&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="发送Actions"><a href="#发送Actions" class="headerlink" title="发送Actions"></a>发送Actions</h3><p>我们使用<code>store.dispatch</code>方法来触发Actions对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.dispatch(&apos;increment&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>之所以搞的这么麻烦是因为Actions支持异步操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">incrementAsync(&#123; commit &#125;) &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    commit(&apos;increment&apos;)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>它在使用的时候和Mutations支持相同的payload和对象格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// payload格式</span><br><span class="line">&lt;button @click=&quot;$store.dispatch(&apos;increment&apos;, &#123;amount: 3&#125;)&quot;&gt;++&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// 对象格式</span><br><span class="line">&lt;button @click=&quot;$store.dispatch(&#123;type: &apos;increment&apos;, amount: 3&#125;)&quot;&gt;++&lt;/button&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  increment (&#123;commit&#125;, payload) &#123;</span><br><span class="line">   commit(&apos;increment&apos;, payload)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它在组件中的用法和Mutations相同，不在赘述。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// JS</span><br><span class="line">import &#123; mapActions &#125;  from &apos;vuex&apos;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">      add: &apos;increment&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>组合Actions</strong></p>
+<p>Actions既然是异步的，那么我们怎么知道它什么时候执行完呢，Actions的处理器可以接收返回一个Promise：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">actionA(&#123;commit&#125;, payload) &#123;</span><br><span class="line">  return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      commit(&apos;increment&apos;, payload)</span><br><span class="line">        resolve(&apos;finish&apos;)</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以现在可以这样接收：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.$store.dispatch(&#123;type: &apos;actionA&apos;, amount: 3&#125;).then((res)=&gt; &#123;</span><br><span class="line">        console.log(res) // finish</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>我们还可以在另一个action里嵌套：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actionB(&#123;dispatch,commit&#125;,payload) &#123;</span><br><span class="line">  return dispatch(&apos;actionA&apos;,payload).then(() =&gt; &#123;</span><br><span class="line">    commit(&apos;incrementOne&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.dispatch(&apos;actionB&apos;,&#123;amount: 4&#125;)</span><br></pre></td></tr></table></figure>
+<p>当然，我们可以使用<code>async/wait</code>组合的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">incrementValue(&#123;state, commit&#125;, payload) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">      // setTimeout(() =&gt; &#123;</span><br><span class="line">      commit(&apos;increment&apos;, payload)</span><br><span class="line">      resolve(&apos;finish&apos;)</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">&#125;,</span><br><span class="line">async actionA(&#123;dispatch, commit&#125;, payload) &#123;</span><br><span class="line">   await dispatch(&apos;incrementValue&apos;, payload)</span><br><span class="line">&#125;,</span><br><span class="line">async actionB(&#123;dispatch,commit&#125;,payload) &#123;</span><br><span class="line">  await dispatch(&apos;actionA&apos;,payload)</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    commit(&apos;incrementOne&apos;)</span><br><span class="line">  &#125;,1000)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.dispatch(&apos;actionB&apos;,&#123;amount: 4&#125;)</span><br></pre></td></tr></table></figure>
+<p>有时候我们action处理器来自不同的模块，我们需要等到所有的action处理完毕后返回一个Promise。</p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>为了防止store在一个文件中越来越大，Vuex支持模块划分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import ModuleA from &apos;./moduleA&apos;</span><br><span class="line">import ModuleB from &apos;./moduleB&apos;</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: 0,</span><br><span class="line">        todos: [</span><br><span class="line">            &#123; id: 1, text: &apos;...&apos;, done: true &#125;,</span><br><span class="line">            &#123; id: 2, text: &apos;...&apos;, done: false&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    modules: &#123;</span><br><span class="line">        a:ModuleA,</span><br><span class="line">        b:ModuleB</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ModuleA.js</span><br><span class="line"> export default&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count:10</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line">// ModuleB.js</span><br><span class="line">export default &#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count:20</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &#123;&#123; $store.state.a &#125;&#125;  // &#123; &quot;count&quot;: 10 &#125;</span><br><span class="line">  &#123;&#123; $store.state.b &#125;&#125;  // &#123; &quot;count&quot;: 20 &#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>在模块内部，mutations和getters里的参数是接收文件内自己的状态，actions的context.state也是一样的，如果我们要访问根节点上的状态，我们需要通过<code>context.rootState</code>导出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">    increment(&#123; state , commit, rootState&#125;) &#123;</span><br><span class="line">        console.log(rootState.count)</span><br><span class="line">        if (rootState.count === 0) &#123;</span><br><span class="line">            commit(&apos;increment&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下，模块内外的事件都是被注册到全局命名空间的，所以访问actions/mutaions的时候，模块间的相同事件是同时响应的，如果想要自包含，需要添加<code>namespaced: true,</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// ModulesA.js</span><br><span class="line"> export default &#123;</span><br><span class="line">    namespaced: true,</span><br><span class="line">    state: &#123;</span><br><span class="line">        count:10</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment (state) &#123;</span><br><span class="line">            state.count++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    actions: &#123;</span><br><span class="line">        someAction (&#123;state, commit,rootState,rootGetters&#125;) &#123;</span><br><span class="line">            dispatch(&apos;someOtherAction&apos;) // moduleA/someOtherAction</span><br><span class="line">            dispatch(&apos;someOtherAction&apos;, null, &#123;root: true&#125;)  // someOtherAction</span><br><span class="line">        &#125;,</span><br><span class="line">        someOtherActon(ctx, payload) &#123;</span><br><span class="line">            // ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>访问的时候加上路径就可以：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;$store.dispatch(&apos;a/increment&apos;)&quot;&gt;moduleA++&lt;/button&gt;</span><br></pre></td></tr></table></figure></p>
+<p>模块间也是可以继承和嵌套的，具体看：<a href="https://vuex.vuejs.org/guide/modules.html" target="_blank" rel="noopener">vuex-modlues</a>。</p>
+<p><strong>在命名空间下访问全局资源</strong></p>
+<p>如果想使用全局的state和getters，那么<code>rootState</code>和<code>rootGetters</code>作为getter函数的第三个和四个参数，他们也被封装到context上下文传递给 aciton 函数。<br>如果想要<code>dispatch</code>或<code>commit</code>到全局命名空间，需要添加<code>{root: true}</code>为第三个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">    someGetter(state, getters, rootState, rootGetters)&#123;</span><br><span class="line">        getters.someOtherGetter  // mudlueA/someOtherGetter</span><br><span class="line">        rootGetters.someOtherGetter  // someOtherGetter</span><br><span class="line">    &#125;,</span><br><span class="line">    someOtherGetter: state =&gt; &#123; //... &#125;</span><br><span class="line">&#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">    someAction (&#123;state, commit,rootState,rootGetters&#125;) &#123;</span><br><span class="line">        dispatch(&apos;someOtherAction&apos;) // moduleA/someOtherAction</span><br><span class="line">        dispatch(&apos;someOtherAction&apos;, null, &#123;root: true&#125;)  // someOtherAction</span><br><span class="line">    &#125;,</span><br><span class="line">    someOtherActon(ctx, payload) &#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>在命名空间下注册全局资源</strong></p>
+<p>在actions对象内，声明action名称对象，在该对象内使用<code>root:true</code>,并把原 action 内的事件处理给到函数<code>handler</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// ModuleA.js</span><br><span class="line">actions: &#123;</span><br><span class="line">       add:&#123;</span><br><span class="line">           root: true,</span><br><span class="line">           handler  (&#123;state, commit&#125;, payload) &#123;</span><br><span class="line">               commit(&apos;increment&apos;)  // moduleA/increment</span><br><span class="line">               commit (&apos;increment&apos;, payload, &#123;root: true&#125;)  // increment</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>命名空间如何绑定助手</strong></p>
+<p>通常情况下，这样来写（以state为例）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; mapState &#125; from &apos;vuex&apos;</span><br><span class="line">computed: &#123;</span><br><span class="line">	...mapState(&#123;</span><br><span class="line">	  namespacedCount: state =&gt; state.a.count</span><br><span class="line">	&#125;),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果mapState里面的对象比较多，写起来有点啰嗦，所以我们可以把命名空间模块写为mapState的第一个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">	...mapState(&apos;a&apos;,&#123;</span><br><span class="line">	           namespacedCount: state =&gt; state.count</span><br><span class="line">	         &#125;),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果mapState，mapGetters，mapMutions都用到这个命名空间，我们没有必要在每一个里面都写一个空间命名参数，可以使用<strong>createNamespacedHelpers</strong>做进一步简化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createNamespacedHelpers &#125; from &apos;vuex&apos;;</span><br><span class="line">const &#123; mapState &#125; = createNamespacedHelpers(&apos;a&apos;)</span><br><span class="line">computed: &#123;</span><br><span class="line">	...mapState(&#123;</span><br><span class="line">	  namespacedCount: state =&gt; state.count</span><br><span class="line">	&#125;),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>What</strong>  | 首先我们介绍了什么是Vuex，它是Vue官方提供的状态管理工具，利用了Vue的响应式特性。</p>
+<p><strong>Why</strong>   | 进而我们指出了为什么要使用Vuex，基于它的响应式更新机制及辅助调试。</p>
+<p><strong>When</strong> | 我们也介绍了你应该什么时候使用Vuex，如何权衡。</p>
+<p><strong>How</strong>   | 我们花了90%以上的篇幅介绍的Vuex的使用细节：</p>
+<ul>
+<li>如何安装</li>
+<li>如何声明</li>
+<li>如何访问</li>
+</ul>
+<p>接着我们介绍了Vuex的六大核心概念，他们分别是：</p>
+<ol>
+<li><strong>State</strong><br>全局状态树，类比组件中的<code>data</code>属性。</li>
+<li><strong>Getters</strong><br>类比组件中的<code>computed</code>属性，可以缓存数据，用于计算逻辑。</li>
+<li><strong>Mutations</strong><br>操作state的唯一方式，类比组件中的<strong>method</strong>。</li>
+<li><strong>Actions</strong><br>做异步事件处理，只能提交给mutations，不能直接操作state，同样类比组件中的<strong>method</strong>。</li>
+<li><strong>Mudules</strong><br>用于复杂场景下的模块划分，可以理解为封装。</li>
+</ol>
+<hr>
+<p>参考：<br><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">Vuex</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/10/04/vue-render-functions-jsx/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2197,7 +2463,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
