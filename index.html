@@ -254,6 +254,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/10/06/webstorm-concise-introduction/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/06/webstorm-concise-introduction/" itemprop="url">WebStorm | 一分钟入门WebStorm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-06T10:22:34+08:00">
+                2019-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>WebStorm</code>是JetBranins开发的JavaScript IDE。</p>
+<p><img src="/2019/10/06/webstorm-concise-introduction/1566441231277.png" alt="Alt text"></p>
+<p>对照上图，我们依次来解释：</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Double ⇧：搜索任何东西</span><br><span class="line">⇧⌘O：查找具体的文件名称</span><br><span class="line">⌘E：最近打开的文件</span><br><span class="line">⌘1：工程目录快捷键</span><br><span class="line">⌘↑：打开导航栏</span><br></pre></td></tr></table></figure>
+<p>以上命令配合箭头键（定位文件）+ 回车键（进入文件）来快速锁定资源位置。</p>
+<h3 id="右侧边栏"><a href="#右侧边栏" class="headerlink" title="右侧边栏"></a>右侧边栏</h3><p><strong>Project</strong>：打开工程目录，功能同<code>⌘1</code></p>
+<p><strong>Structure</strong>：展示当前文件结构（注意需要在具体文件下面才能展示，此功能在文件较大时，快速定位方法和标签位置比较方便）</p>
+<p><strong>npm</strong>：包管理器,点开后界面：</p>
+<p> <img src="/2019/10/06/webstorm-concise-introduction/1566444427277.png" alt="Alt text"></p>
+<ul>
+<li>双击<code>serve</code>启动本地项目，对应命令：<code>npm run serve</code></li>
+<li>双击<code>build</code>执行项目打包命令，对应命令：<code>npm run build</code><blockquote>
+<p>如果双击没反应，右击选择编辑菜单栏，看一下Command，Scripts，Node interpreter，Package mananger都配对了吗，如下图：<br><img src="/2019/10/06/webstorm-concise-introduction/1566444759256.png" alt="Alt text"></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="下侧边栏"><a href="#下侧边栏" class="headerlink" title="下侧边栏"></a>下侧边栏</h3><p><strong>TODO</strong>：查找代办事项</p>
+<blockquote>
+<p>在实际开发中可能经常碰到这样的情况，就是写到一半因为其他原因中断，再回来我们需要知道上次写到哪里了，或声明一些东西一会做更好的优化。我们需要声明TODO代办事项，以便以后可以一下就能找到。这个<code>TODO</code>可以使用小写<code>todo</code>。</p>
+</blockquote>
+<p>如：<br>我们在HelloWorld.vue下声明代办事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  // TODO:find a better way</span><br><span class="line">  props: &#123;</span><br><span class="line">    msg: String</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在TODO下会有如下提示，双击TODO项即可打开文件所在位置，非常方便。<br><img src="/2019/10/06/webstorm-concise-introduction/1566443308778.png" alt="Alt text"></p>
+<p><strong>Version Control</strong>：代码版本控制工具<br><img src="/2019/10/06/webstorm-concise-introduction/1566446079294.png" alt="Alt text"><br>使用GitHub，码云等代码管理工具，配置后可以在这里提交自己的代码。点击第一排列第二个小突触提交代码到对应的版本控制工具，快捷键<code>⌘K</code>。</p>
+<p><strong>Terminal</strong>：IDE下集成的命令行工具</p>
+<blockquote>
+<p>高频应用，我们在里面执行构建、打包、第三方插件安装等命令</p>
+</blockquote>
+<h3 id="文件内操作"><a href="#文件内操作" class="headerlink" title="文件内操作"></a>文件内操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">⌘F：文件内字符查找</span><br><span class="line">⌘R：执行字符替换或批量替换</span><br></pre></td></tr></table></figure>
+<h3 id="OVER"><a href="#OVER" class="headerlink" title="OVER"></a>OVER</h3><p>真的结束了吗，是的，根据80/20法则，我们并不用也没有必要一上来就了解所有的使用细节。我们需要找到那20%的高频操作，而后快速用起来，就是以上这些了。至于其他工具怎么用以及更细节的操作，以后慢慢研究吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/10/05/vuex-state-management/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2161,267 +2309,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/02/04/vue-style-guide-priority-a/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lorne Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/lorne-zhang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LorneNote">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/04/vue-style-guide-priority-a/" itemprop="url">Vue代码规范 -- 基础篇[译]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T18:54:57+08:00">
-                2019-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这是Vue具体代码的官方风格指南。如果你在项目中使用Vue，为了避免错误，小纠结，和反模式，这是一份很好的指导。然而，我们不相信任何风格指导对所有团队和项目是理想的，所以我们鼓励基于过去的经验，围绕着技术栈和个人的价值观做有意义的的偏差。</p>
-<p>很大程度上，我们也总体上避免就JavaScript或HTML提出建议。我们不介意你使用分号还是逗号。我们不介意你对于HTML的属性值使用单引号还是双引号。一些特例除外，比如，我们发现某种模式在Vue的上下文是有用的。</p>
-<blockquote>
-<p>很快，我们也将提供一些强制执行的建议。你将不得不尊重规则，但只要有可能，我们将尽可能向你展示如何使用语法检查和其他自动处理使强制行为变得简单。</p>
-</blockquote>
-<p>最后，我们使用四类来区分我们的规则：</p>
-<h3 id="规则类别"><a href="#规则类别" class="headerlink" title="规则类别"></a>规则类别</h3><h4 id="优先级A：必要的"><a href="#优先级A：必要的" class="headerlink" title="优先级A：必要的"></a>优先级A：必要的</h4><p>这些规则将帮助你避免错误，所以要不惜一切代价的学习和遵守他们。例外可能存在，但非常少，只有你同时精通JavaScript和Vue的专业知识才会这样做。</p>
-<h4 id="优先级B：强烈建议"><a href="#优先级B：强烈建议" class="headerlink" title="优先级B：强烈建议"></a>优先级B：强烈建议</h4><p>这些规则可以提供可读性或为大多数项目的开发者经验。如果违反它们你的代码仍然可以运行，但违反它们比较少见且有正当的理由。</p>
-<h4 id="优先级C：被建议"><a href="#优先级C：被建议" class="headerlink" title="优先级C：被建议"></a>优先级C：被建议</h4><p>当有多个同样好的选择存在，任意选择以确保一致性。在这些规则里，我们描述每一个可以接收的选项和建议一个默认选择。那意味着在你的代码里作出不同的选择会感到自由，一旦你始终如一并且有一个好的理由。请有一个好的理由去写代码！并且遵守社区标准，你将：</p>
-<ol>
-<li>你可以训练你的大脑更容易的解析社区里的代码</li>
-<li>可以复制和粘贴大多数社区代码例子而不需要修改</li>
-<li>常常发现新的员工已经习惯了你喜欢的代码风格，至少在Vue方面是如此</li>
-</ol>
-<h4 id="优先级D-小心使用"><a href="#优先级D-小心使用" class="headerlink" title="优先级D: 小心使用"></a>优先级D: 小心使用</h4><p>Vue存在的一些特性是去适应边缘情况或从历史代码库平滑合并。然而当使用不当的时候，他们可能使你的代码维护困难甚至变成bug的来源。这些规则揭露了潜在的危险性，描述了他们什么时候以及为什么应该避免。</p>
-<h3 id="优先级A级规则：必要的（预防错误）"><a href="#优先级A级规则：必要的（预防错误）" class="headerlink" title="优先级A级规则：必要的（预防错误）"></a>优先级A级规则：必要的（预防错误）</h3><h4 id="多个字的组件名"><a href="#多个字的组件名" class="headerlink" title="多个字的组件名"></a>多个字的组件名</h4><p>组件名应该总是多个词，除了根<code>App</code>组件。</p>
-<p>这个<a href="http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name" target="_blank" rel="noopener">阻止冲突</a>是存在于现在或未来的HTML元素中，由于所有的HTML元素是单个词。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Bad</span><br><span class="line">Vue.component(&apos;todo&apos;,&#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br><span class="line">export default &#123;</span><br><span class="line">	name: &apos;Todo&apos;,</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Good</span><br><span class="line">Vue.component(&apos;todo-item&apos;,&#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br><span class="line">export default &#123;</span><br><span class="line">	name: &apos;TodoItem&apos;,</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="组件数据"><a href="#组件数据" class="headerlink" title="组件数据"></a>组件数据</h4><p><strong>组件<code>data</code>必须是一个函数。</strong><br>当在一个组件使用<strong>data</strong>属性（任何地方除了<strong>new Vue</strong>）,值必须是一个返回一个对象的函数。</p>
-<blockquote>
-<p><strong>详细解释</strong><br>当<code>data</code>的值是一个对象的时候，它在组件的所有实例之间共享。想象一下，例如，一个携带data的<code>TodoList</code>组件：</p>
-</blockquote>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">	listTitle: &apos;&apos;,</span><br><span class="line">	todos: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>我们可能想要复用这个组件，允许用户去操作多个lists（例如：购物，愿望清单，日常家务，等等）。然而有一个问题。由于每一个组件的实例引用了相同的data对象，改变一个列表的标题也会改变其他列表的标题。添加/编辑/删除操作也是如此。</p>
-<p>替代方案是，我们想要每一个组件实例单独管理自己的data。为了实现这一点，每一个实例必须生成一个唯一的data对象。在JavaScript，这能够通过在函数中返回一个对象实现：</p>
-</blockquote>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data: function ( ) &#123;</span><br><span class="line"> return &#123;</span><br><span class="line">		listTitle: &apos; &apos;,</span><br><span class="line">		todos: [ ]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p> <strong>Bad</strong><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;some-comp&apos;, &#123;</span><br><span class="line"> data: &#123;</span><br><span class="line">		foo: &apos;bar&apos;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line"> data: &#123;</span><br><span class="line">	foo: bar</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <strong>Good</strong><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> Vue.component(&apos;some-comp&apos;, &#123;</span><br><span class="line">	 data: function () &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				foo: &apos;bar&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// In a .vue file</span><br><span class="line">export default &#123;</span><br><span class="line">	data () &#123;</span><br><span class="line">		return &#123;</span><br><span class="line">			foo: &apos;bar&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在一个根Vue实例直接使用一个对象是可以的，因为一个单一的实例将永远存在</span><br><span class="line">new Vue(&#123;</span><br><span class="line">	data: &#123;</span><br><span class="line">		foo: &apos;bar&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="Prop-定义"><a href="#Prop-定义" class="headerlink" title="Prop 定义"></a>Prop 定义</h4><p><strong>Prop定义应该尽可能的详细。</strong><br>在提交的代码中，prop定义应该尽可能的详细，至少指定类型。</p>
-<blockquote>
-<p><strong>详细解释</strong><br>详细的<a href="https://vuejs.org/v2/guide/components-props.html#Prop-Validation" target="_blank" rel="noopener">prop 定义</a>有两个优势：</p>
-<ul>
-<li>他们记录组件的API，这样就很容易看出组件是如何被使用的。</li>
-<li>在开发中，如果一个组件的格式不正确，Vue将警告你，帮助你追踪潜在的错误来源。</li>
-</ul>
-</blockquote>
-<p> <strong>Bad</strong><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 只有当原型化的时候是可以的</span><br><span class="line">props：[&apos;status&apos;]</span><br></pre></td></tr></table></figure></p>
-<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">	status: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 甚至更好</span><br><span class="line">props：&#123;</span><br><span class="line">	status: &#123;</span><br><span class="line">		type: String,</span><br><span class="line">		required: true,</span><br><span class="line">		validator: function (value) &#123;</span><br><span class="line">			return [</span><br><span class="line">				&apos;syncing&apos;,</span><br><span class="line">				&apos;synced&apos;,</span><br><span class="line">				&apos;version-conflict&apos;,</span><br><span class="line">				&apos;error&apos;</span><br><span class="line">			].indexOf(value) !== -1</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="有键的v-for"><a href="#有键的v-for" class="headerlink" title="有键的v-for"></a>有键的<code>v-for</code></h4><p><strong>总是使用带<code>key</code>的<code>v-for</code>。</strong><br>在组件上使用带<code>key</code>的<code>v-for</code>总是有效的，以便维护内部组件及子组件的状态。即使对元素来说，保持可预测的行为也是很好的实践，比如动画中的<a href="https://bost.ocks.org/mike/constancy/" target="_blank" rel="noopener">对象固化（object constancy）</a>。</p>
-<blockquote>
-<p><strong>详解解释</strong><br>假如你有一个代办事项列表：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data: function () &#123;</span><br><span class="line">	return &#123;</span><br><span class="line">		todos: [</span><br><span class="line">			&#123;</span><br><span class="line">				id: 1,</span><br><span class="line">				text: &apos;Learn to use v-for&apos;</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				id: 2,</span><br><span class="line">				text: &apos;Learn to use key&apos;</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后按字母顺序。当更新DOM时，我们将优化渲染尽可能的降低DOM改变的消耗。那可能意味着删除第一个代办元素，然后在列表的末尾再增加一个。</p>
-</blockquote>
-<blockquote>
-<p>问题是，在这些例子中，即：更新了元素又不删除元素是重要的。例如，你可能使用<code>&lt;transition-group&gt;</code>动态的排序列表。或者渲染的元素是一个<code>&lt;input&gt;</code>维持焦点。在这些例子中，对于每一个item添加唯一的key（e.g. <code>:key=&quot;todo.id&quot;</code>）将告诉Vue怎么样的行为更智能。</p>
-</blockquote>
-<blockquote>
-<p>在我们的经验当中，总是增加一个唯一的key总是更好的，你和你的团队根本不用担心边缘问题。然后在罕见的情况下，在罕见的、性能关键的场景中，对象的稳定性是不必要的，你可以有意识的破例。</p>
-</blockquote>
-<hr>
-<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">&lt;li v-for=&quot;todo in todos&quot;&gt;</span><br><span class="line">	&#123;&#123; todo.text &#125;&#125;</span><br><span class="line">&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<p> <strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">&lt;li</span><br><span class="line"> 	v-for=&quot;todo in todos&quot;</span><br><span class="line"> 	:key=&quot;todo.id&quot;&gt;</span><br><span class="line">	 	&#123;&#123; todo.text &#125;&#125;</span><br><span class="line"> &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="避免在v-for中使用v-if"><a href="#避免在v-for中使用v-if" class="headerlink" title="避免在v-for中使用v-if"></a>避免在<code>v-for</code>中使用<code>v-if</code></h4><p><strong>不要在与<code>v-for</code>相同的元素上使用<code>v-if</code>。</strong><br>在两种情况下这可能是诱人的：</p>
-<ul>
-<li>在列表中过滤items（e.g. <code>v-for=&quot;user in users&quot; v-if=&quot;user.isActive&quot;</code>）。在这些例子中，使用一个新的计算属性替换<code>users</code>，并返回过滤后的list（例如：<code>activeUsers</code>）。</li>
-<li>避免在应该隐藏列表时渲染列表（eg：<code>v-for=&quot;user in users&quot;  v-if=&quot;shouldShowUsers&quot;</code>).在这些例子中，移动v-if到容器元素（e.g. <code>ul</code>, <code>ol</code>）。</li>
-</ul>
-<blockquote>
-<p><strong>详细解释</strong><br>当Vue处理指令的时候，<code>v-for</code>比<code>v-if</code>有更高的优先级，所以这个模板：</p>
-</blockquote>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		v-if=&quot;user.isActive&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将被评估类似于：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.users.map(function (user) &#123;</span><br><span class="line">	if (user.isActive) &#123;</span><br><span class="line">		return user.name</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>因此即使我们仅仅为一小部分用户渲染元素，我们每次重新渲染的时候我们不得不迭代整个列表，去判断是否设置的活跃用户已经改变。</p>
-</blockquote>
-<blockquote>
-<p>通过迭代计算属性代替，像这样：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">	activeUsers: function () &#123;</span><br><span class="line">		return this.users.filter( function (user) &#123;</span><br><span class="line">			return user.isActive</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in activeUsers&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>我们将得到以下好处：</p>
-<ul>
-<li>如果<code>users</code>数组有改变，仅仅被过滤的列表重新计算，使过滤更高效。</li>
-<li>使用<code>v-for=&quot;user in activeUsers&quot;</code>,在渲染期间我们仅仅迭代被激活的元素，使渲染更高效。</li>
-<li>逻辑在表现层解耦，使维护（逻辑的改变或拓展）变得更容易。</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>我们从更新中得到类似的好处：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		v-if=&quot;shouldShowUsers&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>到：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul v-if=&quot;shouldShowUsers&quot;&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过移动<code>v-if</code>给一个容器元素，我们在每一个用户列表将不再检查<code>shouldShowUsers</code>。作为替代，我们检查一次，并且如果<code>shouldShowUsers</code>是false我们将不再计算。</p>
-</blockquote>
-<hr>
-<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		v-if=&quot;user.isActive&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		v-if=&quot;shouldShowUsers&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in activeUsers&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul v-if=&quot;shouldShowUsers&quot;&gt;</span><br><span class="line">	&lt;li</span><br><span class="line">		v-for=&quot;user in users&quot;</span><br><span class="line">		:key=&quot;user.id&quot;&gt;</span><br><span class="line">			&#123;&#123; user.name &#125;&#125;</span><br><span class="line">	&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="组件样式作用域"><a href="#组件样式作用域" class="headerlink" title="组件样式作用域"></a>组件样式作用域</h4><p>对于应用，一个顶层的<strong>App</strong>组件与布局组件的样式可能是全局的，但其他组件应用有自己的作用域。<br>这条仅仅与<a href="https://vuejs.org/v2/guide/single-file-components.html" target="_blank" rel="noopener">单文件组件</a>有关。<code>scoped</code><a href="https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles" target="_blank" rel="noopener">特性</a>的使用不是必须的，设置作用域可以通过<a href="https://vue-loader.vuejs.org/guide/scoped-css.html" target="_blank" rel="noopener">CSS modules</a>实现。一个基于类的类似于<a href="http://getbem.com" target="_blank" rel="noopener">BEM</a>的策略，或其他库/惯例。</p>
-<p><strong>然而，组件库应该更倾向于使用基于类的策略而不是<code>作用域</code>属性。</strong></p>
-<p>这使你复写内部样式更容易，使用没有很高的差异性的可读性强的类名，而且不太会导致冲突。</p>
-<blockquote>
-<p><strong>详细解释</strong><br>如果你正在开发一个大项目，并且和其他的开发者合作，或有时包含第三方HTML/CSS(例如：来自Auth0)，设置一致的样式能够保证你的样式只适用于他们想要的组件。</p>
-</blockquote>
-<blockquote>
-<p>在<strong>scoped</strong>特性之上，使用唯一的class名称能够确保第三方CSS不会应用于你自己的HTML。例如，许多项目使用<code>button</code>，<code>btn</code>or <code>icon</code>类名，所以即使不使用类似于BEM的策略。添加特定应用或特定组件的前缀（例如：ButtonClose-icon）也能启到一些保护作用。</p>
-</blockquote>
-<hr>
-<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button class=&quot;btn btn-close&quot;&gt;X&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.btn-close &#123;</span><br><span class="line">	background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
-<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button class=&quot;button button-close&quot;&gt;X&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;! --  Using the `scoped` attribute -- &gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.button &#123;</span><br><span class="line">	border: none;</span><br><span class="line">	border-radius: 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.button-close &#123;</span><br><span class="line">	background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button :class=&quot;[$style.button, $style.buttonClose]&quot;&gt;X&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;! -- 使用CSS模块 -- &gt;</span><br><span class="line">&lt;style module&gt;</span><br><span class="line">.button &#123;</span><br><span class="line">	border: none;</span><br><span class="line">	border-radius: 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.buttonClose &#123;</span><br><span class="line">	background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button class=&quot;c-Button--close&quot;&gt;X&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;! -- 使用BEM惯例 -- &gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">.c-Button &#123;</span><br><span class="line">	border: none;</span><br><span class="line">	border-radius: 2px;</span><br><span class="line">&#125;</span><br><span class="line">.c-Button-close &#123;</span><br><span class="line">	background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="私有属性名字"><a href="#私有属性名字" class="headerlink" title="私有属性名字"></a>私有属性名字</h4><p>在一个插件，混入等，对于自定义属性总是使用<code>$_</code>前缀。然后避免和其它作者的代码冲突，也包含一个被命名的范围（例如：<code>$_yourPluginName_</code>）。</p>
-<blockquote>
-<p>详细解释<br>Vue使用下划线<code>_</code>前缀去定义自己的私有属性，所以使用相同前缀（例如：<code>_update</code>）的风险可能会覆写一个实例属性。即使你检查了Vue当前没有使用一个特定的属性名，并不能保证在以后的升级中没有冲突。</p>
-</blockquote>
-<blockquote>
-<p>正如<code>$</code>前缀，它在Vue生态系统中的目的是向用户公开的特殊的实例属性，所以在私有属性里使用它并不合适。</p>
-</blockquote>
-<blockquote>
-<p>替代的，我们推荐把这两个前缀联合起来<code>$_</code>,作为一个用户自定义的私有属性不和Vue冲突的习惯用法。</p>
-</blockquote>
-<hr>
-<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myGreatMixin = &#123;</span><br><span class="line">	// ...</span><br><span class="line">	methods: &#123;</span><br><span class="line">		update: function () &#123;</span><br><span class="line">				// ...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var myGreatMixin = &#123;</span><br><span class="line">// ...</span><br><span class="line">	methods: &#123;</span><br><span class="line">		methods: &#123;</span><br><span class="line">			_update: function () &#123;</span><br><span class="line">				// ...</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myGreatMixin = &#123;</span><br><span class="line">	// ...</span><br><span class="line">	methods: &#123;</span><br><span class="line">		$update: function () &#123;</span><br><span class="line">			// ...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myGreatMixin = &#123;</span><br><span class="line">	// ...</span><br><span class="line">	methods: &#123;</span><br><span class="line">		$_update: function () &#123;</span><br><span class="line">			// ...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myGreatMixin = &#123;</span><br><span class="line">	// ...</span><br><span class="line">	methods: &#123;</span><br><span class="line">		$_myGreatMixin_update: function () &#123;</span><br><span class="line">			// ...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>原文：<a href="https://vuejs.org/v2/style-guide/" target="_blank" rel="noopener">Style Guide for Vue(英)</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2463,7 +2357,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
