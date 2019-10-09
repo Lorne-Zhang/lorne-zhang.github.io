@@ -328,8 +328,8 @@
             <blockquote>
 <p><strong>注意：</strong> 本文所有示例代码详见：<a href="https://github.com/Lorne-Zhang/vue-router-demo" target="_blank" rel="noopener">vue-rouer-demo</a></p>
 </blockquote>
-<h2 id="1-What-什么是Vue-Router"><a href="#1-What-什么是Vue-Router" class="headerlink" title="1.What | 什么是Vue Router"></a>1.What | 什么是Vue Router</h2><p><code>Vue Router</code>是Vue.js提供的官方路由管理器，它和Vue.js深度集成,使构建单页面应用非常方便。</p>
-<h2 id="2-Why-为什么要使用Vue-Router"><a href="#2-Why-为什么要使用Vue-Router" class="headerlink" title="2.Why | 为什么要使用Vue Router"></a>2.Why | 为什么要使用Vue Router</h2><p>大家打开<a href="https://lornenote.com">LorneNote</a>个网站，这是我的一个blog网站，采用传统的开发模式，鼠标右击，在出现的菜单里选择View Page Source 查看资源文件，大家会看到它对应的是一个HTML文件，然后你回到网站里点击归档栏，再次右击查看源文件，你会看到整个页面被重新加载，对应归档的HTML文件，即：</p>
+<h2 id="What-什么是Vue-Router"><a href="#What-什么是Vue-Router" class="headerlink" title="What | 什么是Vue Router"></a>What | 什么是Vue Router</h2><p><code>Vue Router</code>是Vue.js提供的官方路由管理器，它和Vue.js深度集成,使构建单页面应用非常方便。</p>
+<h2 id="Why-为什么要使用Vue-Router"><a href="#Why-为什么要使用Vue-Router" class="headerlink" title="Why | 为什么要使用Vue Router"></a>Why | 为什么要使用Vue Router</h2><p>大家打开<a href="https://lornenote.com">LorneNote</a>个网站，这是我的一个blog网站，采用传统的开发模式，鼠标右击，在出现的菜单里选择View Page Source 查看资源文件，大家会看到它对应的是一个HTML文件，然后你回到网站里点击归档栏，再次右击查看源文件，你会看到整个页面被重新加载，对应归档的HTML文件，即：</p>
 <ul>
 <li><a href="https://lornenote.com">https://lornenote.com</a>    —–&gt; LorneNote HTML文件</li>
 <li><a href="https://lornenote.com/archives/">https://lornenote.com/archives/</a>   —–&gt; 归档 | LorneNote HTML文件</li>
@@ -341,7 +341,7 @@
 <li>提供URL和组件之间的映射关系，并在URL变化的时候执行对象逻辑</li>
 <li>提供多种方式改变URL的API(URL的变化不会导致浏览器刷新)</li>
 </ul>
-<h2 id="3-How-Vue-Router-如何使用"><a href="#3-How-Vue-Router-如何使用" class="headerlink" title="3.How | Vue Router 如何使用"></a>3.How | Vue Router 如何使用</h2><h3 id="核心使用步骤"><a href="#核心使用步骤" class="headerlink" title="核心使用步骤"></a>核心使用步骤</h3><ol>
+<h2 id="How-Vue-Router-如何使用"><a href="#How-Vue-Router-如何使用" class="headerlink" title="How | Vue Router 如何使用"></a>How | Vue Router 如何使用</h2><h3 id="核心使用步骤"><a href="#核心使用步骤" class="headerlink" title="核心使用步骤"></a>核心使用步骤</h3><ol>
 <li>安装并导入VueRouter，调用Vue.use(VueRouter)，这样的话可以使用<code>&lt;router-view&gt;</code>和<code>&lt;router-link&gt;</code>等全局组件</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 安装命令</span><br><span class="line">$ npm install vue-router</span><br><span class="line"></span><br><span class="line">// main.js</span><br><span class="line">import App from &apos;./App.vue&apos;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;</span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure>
