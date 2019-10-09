@@ -254,6 +254,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/02/07/build-simple-vue-project/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/07/build-simple-vue-project/" itemprop="url">从0到1构建极简Vue项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T13:07:16+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p><strong>注意</strong><br>本文默认读者掌握了一定的前端知识，如果你对前端知识一无所知，请先自行查看前端的三大知识点（HTML + CSS + JavaScript），而后再回来继续。</p>
+</blockquote>
+<h3 id="初步搭建开发环境"><a href="#初步搭建开发环境" class="headerlink" title="初步搭建开发环境"></a>初步搭建开发环境</h3><h4 id="安装CLI"><a href="#安装CLI" class="headerlink" title="安装CLI"></a>安装CLI</h4><p>要搭建Vue项目，我们需要使用一个工具<code>CLI</code>。CLI需要<code>Node.js</code>环境，我们使用的包管理工具是<code>npm</code>，如果Node.js和npm没有安装，请先行安装。如已经安装，那么我们继续。请打开Mac(注意这里的演示使用MacOS系统)的Terminal，输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g @vue/cli</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，键入如下命令查看是否正确安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue --version</span><br></pre></td></tr></table></figure></p>
+<p>已安装完成会显示Vue的版本信息，比如：<code>3.4.0</code>。</p>
+<h4 id="创建Vue项目"><a href="#创建Vue项目" class="headerlink" title="创建Vue项目"></a>创建Vue项目</h4><p>创建一个存储项目的目录文件夹（VueProject–目录名，可自行定义）并进入该目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir VueProject</span><br><span class="line">$ cd VueProject</span><br></pre></td></tr></table></figure></p>
+<p>输入如下命令初始化项目(hello-world为项目名，可<br>自行定义,当然，该项目名最终也会生成一个文件夹，内部为项目相关文件)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue create hello-world</span><br></pre></td></tr></table></figure></p>
+<p>会出现一个选择项：<strong>Please pick a preset：</strong>，直接回车默认<code>default（babel,eslint）</code>安装项即可。等待一分钟左右，项目即构建完成。整个项目大概113.3M左右，不用担心，多是一些开发环境需要用到的依赖包，将来发布到线上的包一般只有几兆而已。</p>
+<p>目录结构：<br><img src="/2019/02/07/build-simple-vue-project/Screen Shot 2019-02-07 at 14.34.59.png" alt="Alt text"></p>
+<p>随便翻翻，了解一个Vue项目的基本目录结构，<code>package.json</code>里面是项目依赖包的信息及版本号。</p>
+<p>最后一步，进入我们刚刚创建的项目，启动服务器编译运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd hello-world</span><br><span class="line">$ npm run serve</span><br></pre></td></tr></table></figure></p>
+<p>启动完毕，会给出访问地址提示，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App running at:</span><br><span class="line">  - Local:   http://localhost:8080/</span><br><span class="line">  - Network: http://192.168.1.4:8080/</span><br></pre></td></tr></table></figure></p>
+<p>打开浏览器，分别输入本地地址（<a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> ）或网络地址（<a href="http://192.168.1.4:8080/）皆可访问。" target="_blank" rel="noopener">http://192.168.1.4:8080/）皆可访问。</a></p>
+<p>至此，一个极简的Vue项目搭建完成，<code>Vue CLI</code>是一个基于插件的体系结构，使得它非常灵活且可拓展，可以根据自己的需要安装对应插件。接下来就是更深入的需求定制，可通读Vue CLI的官方文档，熟悉更多项目搭建的细节，不要急，一步一步来，链接如下：<br><a href="https://cli.vuejs.org" target="_blank" rel="noopener">Vue CLI（英）</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/02/04/vue-style-guide-priority-a/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -547,7 +681,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
