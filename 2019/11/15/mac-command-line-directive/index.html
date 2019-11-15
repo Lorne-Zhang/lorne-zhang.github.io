@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Shell &amp;amp; Bash命名行在程序员的常用的技能，命令行由Shell提供，传递给操作系统内核。学习命令行就是在学Shell指令，Mac-OS 下的默认shell是bash。  ShellShell：命名语言解释器（command-language-interpreter），你和操作系统内核之间的接口程序，内建了shell指令集。Bash 一个命令处理器，全称：Bourne-Again S">
+<meta name="keywords" content="LorneNote">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac命令行的使用">
+<meta property="og:url" content="https://lornenote.com/2019/11/15/mac-command-line-directive/index.html">
+<meta property="og:site_name" content="LorneNote">
+<meta property="og:description" content="Shell &amp;amp; Bash命名行在程序员的常用的技能，命令行由Shell提供，传递给操作系统内核。学习命令行就是在学Shell指令，Mac-OS 下的默认shell是bash。  ShellShell：命名语言解释器（command-language-interpreter），你和操作系统内核之间的接口程序，内建了shell指令集。Bash 一个命令处理器，全称：Bourne-Again S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lornenote.com/2019/11/15/mac-command-line-directive/1573721193328.png">
+<meta property="og:image" content="https://lornenote.com/2019/11/15/mac-command-line-directive/1573722411555.png">
+<meta property="og:image" content="https://lornenote.com/2019/11/15/mac-command-line-directive/1573722425457.png">
+<meta property="og:updated_time" content="2019-11-15T14:31:21.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac命令行的使用">
+<meta name="twitter:description" content="Shell &amp;amp; Bash命名行在程序员的常用的技能，命令行由Shell提供，传递给操作系统内核。学习命令行就是在学Shell指令，Mac-OS 下的默认shell是bash。  ShellShell：命名语言解释器（command-language-interpreter），你和操作系统内核之间的接口程序，内建了shell指令集。Bash 一个命令处理器，全称：Bourne-Again S">
+<meta name="twitter:image" content="https://lornenote.com/2019/11/15/mac-command-line-directive/1573721193328.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lornenote.com/2019/11/15/mac-command-line-directive/">
+
+
+
+
+
+  <title>Mac命令行的使用 | LorneNote</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LorneNote</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">通往互联网自由之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/11/15/mac-command-line-directive/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mac命令行的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-15T22:24:06+08:00">
+                2019-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Shell-amp-Bash"><a href="#Shell-amp-Bash" class="headerlink" title="Shell &amp; Bash"></a>Shell &amp; Bash</h2><p>命名行在程序员的常用的技能，命令行由Shell提供，传递给操作系统内核。学习命令行就是在学Shell指令，Mac-OS 下的默认shell是<code>bash</code>。</p>
+<blockquote>
+<p><strong>Shell</strong><br>Shell：命名语言解释器（command-language-interpreter），你和操作系统内核之间的接口程序，内建了shell指令集。<br><strong>Bash</strong><br> 一个命令处理器，全称：Bourne-Again Shell，Bash是<a href="https://baike.baidu.com/item/Bourne%20shell" target="_blank" rel="noopener">Bourne shell</a>后继兼容版本与开放源代码版本，Bourne shell 是一个交换式的命令解释器和命令编程语言。bash的命令语法是Bourne shell命令语法的超集。bash 与 Bourne shell 完全向后兼容，并且在 Bourne shell 的基础上增加和增强了很多特性。bash 也包含了很多 C 和 Korn shell 里的优点。bash 有很灵活和强大的编程接口，同时又有很友好的用户界面。更多细节查看<a href="https://www.cnblogs.com/hihtml5/p/9272751.html" target="_blank" rel="noopener">bash与shell的关系</a>。</p>
+</blockquote>
+<h2 id="Mac下命令行的基本使用"><a href="#Mac下命令行的基本使用" class="headerlink" title="Mac下命令行的基本使用"></a>Mac下命令行的基本使用</h2><p>上面我们提到Mac下默认使用bash shell，初次接触使用bash即可，安装其他的第三方shell并学习一些花样语法没有太多必要，找出和自己工作相关的常用命令用以提高工作效率，熟练之后再去探索诸如提升体验的配置皮肤、自定义快捷键、或熟悉其他第三方shell。以下列出Mac比较常用的命令。</p>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p><strong>1. 文件和文件夹自动补全</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tab: 文件和文件夹名自动补全</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 光标位置控制</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + A ：跳到当前行的开始</span><br><span class="line">Ctrl + E ：跳到当前行的结束</span><br><span class="line">Option + -&gt; : 向前移动一个词 // windows 键盘使用Alt键</span><br><span class="line">Option + &lt;- : 向后移动一个词</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 文字内容控制</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + L ：清空屏幕</span><br><span class="line">Ctrl + U ：清空光标前的行</span><br><span class="line">Ctrl + K ：清空光标后的行</span><br><span class="line">Ctrl + W ：删除光标前的词（注意与`Ctrl + U`的区别，前者删除一个词，后者清空整行命令）</span><br></pre></td></tr></table></figure></p>
+<p><strong>4.进程控制</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + C ： 关闭你正在运行的任何程序</span><br><span class="line">Ctrl + D ：退出当前命令行窗口</span><br><span class="line">Ctrl + Z ： 暂停当前程序的运行（注意`Ctrl + C`相当于closed，而`Ctrl + Z`相当于stoped）</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>特别说明</strong><br>如果你<code>Ctrl + Z</code>将程序挂起到后台，那么如何恢复前台运行呢<br><img src="/2019/11/15/mac-command-line-directive/1573721193328.png" alt="Alt text"><br>看上面我启动了一个监听任务：<code>http://localhost:8084</code><br>然后按Ctrl + Z，暂停监听<br><code>bg(background)</code>查询后台挂起的任务，当前只有一个<br><code>fd(front desk)</code>查询前台运行的任务，默认执行最后一个，也就是将挂起任务激活执行。 也可以指定 <code>fd npm run dev</code><br>另外<code>jobs</code>命令查看前后台所有任务<br>参考：<a href="https://blog.csdn.net/weixin_37251044/article/details/79435035" target="_blank" rel="noopener">在LINUX中，用Ctrl+Z挂起的命令怎么切回到原任务的命令窗口？</a></p>
+</blockquote>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p><strong>1. 目录路径操作</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/ : 顶层目录</span><br><span class="line">. : 当前目录</span><br><span class="line">.. : 父级目录</span><br><span class="line">~ : Home目录</span><br><span class="line">cd ： Home 目录</span><br><span class="line">cd ~ ： Home 目录</span><br><span class="line">cd / : 驱动的根节点</span><br><span class="line">cd - : 你浏览的上一个文件夹或目录</span><br><span class="line">pwd : 展示当前目录路径</span><br><span class="line">cd .. : 移动到父级目录</span><br><span class="line">cd ../.. : 移动两层父级目录</span><br></pre></td></tr></table></figure></p>
+<p><strong>2.列表目录内容</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ls：显示目录中文件和子目录的名字</span><br><span class="line">ls -1 : 以每行一个的格式显示文件列表</span><br><span class="line">ls -F : 在每个目录路径后立即显示/(斜杠)，在可执行程序或脚本后显示*（星号），在符号链接后显示@</span><br><span class="line">ls -S : 按文件尺寸从小到大对文件或目录进行排序</span><br><span class="line">ls -l : 长格式的列表。包含文件模式、所有者和组名、修改的日期和时间文件、路径名等</span><br><span class="line">ls -lt : 以文件的修改顺序列出文件（最近修改的在前）</span><br><span class="line">ls -lh : 长清单，以KB、MB或GB表示人类可读的文件大小</span><br><span class="line">ls -la ：列出目录详情，包括隐藏文件</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.文件尺寸和磁盘空间</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// du：disk utility 磁盘实用工具</span><br><span class="line">du : 列出子目录的磁盘使用情况</span><br><span class="line">du * : 列表所有子文件夹和文件的磁盘使用情况</span><br><span class="line">du -s [file/folder]: 显示指定文件或文件夹的磁盘使用情况,如果没有指定显示当前目录所在文件的磁盘总尺寸，`-s`：（display）显示指定文件的条目</span><br><span class="line">du -sh : 与`du -s`的区别是多加了一个h，（human-readable）,以可读方式输出，即输出会加上单位，比如Byte，KB，GB等</span><br><span class="line">du -sh * : 查看当前文件夹内文件和目录的大小</span><br><span class="line">du -sh * | sort -nr ： 查看当前文件夹内文件和目录的大小并从大到小排序显示</span><br><span class="line">df -h : 计算系统剩余磁盘空间(disk free)</span><br><span class="line">df -H ： 使用以10为底的大小（而不是1024）计算磁盘剩余空间，最终数字是三位或更少</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>关于磁盘使用情况单位及命令的解释</strong><br>使用<code>du</code>命令查看磁盘使用情况的时候，默认是没有显示单位，只显示数字，而这个数字的单位是512byte，而非1024byte，也就是说，假如你使用<code>du -s [file]</code>命令显示的大小为536，那么du -sh [file] 加上单位的显示为<code>268k</code>。而关于-h、-s等指令的具体含义，可以使用<code>man du</code>命令查看du的使用手册。<br>参考：<br><a href="https://segmentfault.com/a/1190000019910415?utm_source=tag-newest" target="_blank" rel="noopener">Mac OS 命令du单位问题</a><br><a href="https://blog.csdn.net/tterminator/article/details/48212575" target="_blank" rel="noopener">Mac du 笔记</a></p>
+</blockquote>
+<p><strong>4.文件和目录管理</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">open + 文件 ： 打开一个文件</span><br><span class="line"></span><br><span class="line">// 创建</span><br><span class="line">mkdir &lt;dir&gt; : 创建名称为&lt;dir&gt;的新文件夹</span><br><span class="line">mkdir -p &lt;dir&gt;/&lt;dir&gt; : 创建嵌套文件夹</span><br><span class="line">mkdir &lt;dir1&gt;&lt;dir2&gt;&lt;dir3&gt; : 一次创建多个文件夹</span><br><span class="line">mkdir &apos; &lt;dir&gt;&apos; : 创建一个有空格的文件夹</span><br><span class="line">rmdir &lt;dir&gt; ： 删除文件夹（只对空文件夹有效，如果非空文件夹，用下一条命令）</span><br><span class="line">rm -R &lt;dir&gt; : 删除文件夹和它的内容</span><br><span class="line"></span><br><span class="line">touch &lt;file&gt; : 以任何拓展名创建文件</span><br><span class="line"></span><br><span class="line">// 拷贝</span><br><span class="line">cp &lt;file&gt;&lt;dir&gt; : 拷贝一个文件到一个目录</span><br><span class="line">cp &lt;file&gt; &lt;newfile&gt; : 复制当前文件夹下的指定文件</span><br><span class="line">cp &lt;file&gt;~/&lt;dir&gt;/&lt;newfile&gt; : 拷贝当前文件到一个新的文件夹下并重新命名</span><br><span class="line">cp -i &lt;file&gt;&lt;dir&gt; : 如果覆写文件会给一个提醒</span><br><span class="line">cp &lt;file1&gt; &lt;file2&gt; /Users/&lt;dir&gt; : 拷贝多个文件到一个文件夹</span><br><span class="line"></span><br><span class="line">// 删除</span><br><span class="line">rm &lt;file&gt;  : 删除指定文件（永久删除，谨慎使用）</span><br><span class="line">rm -i &lt;file&gt; : 删除文件时给你一个确认</span><br><span class="line">rm -f &lt;file&gt; : 强制删除不给提醒</span><br><span class="line">rm &lt;file1&gt; &lt;file2&gt; &lt;file3&gt; : 删除多个文件</span><br><span class="line"></span><br><span class="line">// 移动</span><br><span class="line">mv &lt;file&gt; &lt;newfilename&gt; : 移动/重命名</span><br><span class="line">mv &lt;file&gt;&lt;dir&gt; : 移动一个文件到文件夹，可能覆写已经存在的文件</span><br><span class="line">mv -i &lt;file&gt;&lt;dir&gt;  : 移动文件到一个文件夹，覆写文件之前会给提示，如果没有覆写直接移动</span><br><span class="line">mv *.png ~/&lt;dir&gt; : 移动所有的PNG图片从当前文件夹到一个不同的文件夹</span><br></pre></td></tr></table></figure></p>
+<p><strong>5.权限控制</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo x : 以超级用户的权限运行命令</span><br><span class="line">ls -ld : 默认显示home目录的权限</span><br><span class="line">ls -ld &lt;dir&gt; : 显示一个文件夹的读写和访问权限</span><br><span class="line">chmod 755 &lt;file&gt; : 改变一个文件的权限为755，chmod本身表示修改文件权限的意思</span><br><span class="line">chmod -R 600 &lt;dir&gt; : 改变一个文件夹和它的内容的权限为600</span><br></pre></td></tr></table></figure></p>
+<p><strong>关于文件权限数字和用户的对应关系</strong><br><img src="/2019/11/15/mac-command-line-directive/1573722411555.png" alt="Alt text"><br><img src="/2019/11/15/mac-command-line-directive/1573722425457.png" alt="Alt text"><br>上图出自<a href="http://www.macinstruct.com/node/415" target="_blank" rel="noopener">How to set File Permissions in Mac OS X</a>，作者的这两个图已经把数字和权限的对应关系表现的一目了然。所有的权限由0-7表示，其实是一个八进制数字。</p>
+<p>Mac一般会有三类用户：<br><code>owner</code>（所有者）<br><code>staff</code>（组–与文件所有者同在一个用户组的用户）<br><code>everyone</code>（其他用户组的用户）:</p>
+<p>而权限的三个数字分别对应如上三类用户，比如755，分别对应如上三种权限，7 代表读写和执行权限（为owner所拥有）、第一个5可读可执行(为staff所拥有)、第二个5为可读可执行（为everyone所拥有）</p>
+<p>参考：<br><a href="https://www.cnblogs.com/shangzekai/p/5822907.html" target="_blank" rel="noopener">linux chmod 755</a></p>
+<p><strong>6.进程查看</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ps -ax : 显示操作系统当前运行的所有进程，这里 `a`展示所有用户进程，`x`展示所有未连接到终端的进程</span><br><span class="line">top ： 显示操作系统当前运行程序的时实信息</span><br><span class="line">top -ocpu -s 5 ： 按CPU使用情况排序进程，每5秒更新一次</span><br><span class="line">top -o rsize : 根据内存使用情况进行排序</span><br><span class="line">kill PID : 使用ID&lt;PID&gt;退出进程,可以通过活动监视器查看进程的PID</span><br><span class="line">ps -ax | grep &lt;appname&gt; : 通过名字或PID查找一个进程，`grep`为UNIX工具程序，可做文件内的字符串查找</span><br></pre></td></tr></table></figure></p>
+<p><strong>7.网络相关</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ping &lt;主机&gt; : Ping主机和显示状态，如ping www.cnblogs.com</span><br><span class="line">whois &lt;域名&gt; : 输出一个域名的查询信息</span><br><span class="line">curl -O &lt;url/to/file&gt; : 下载文件通过HTTP，HTPS，or FTP</span><br><span class="line">ssh &lt;username&gt;@&lt;host&gt; : 建立SSH连接给&lt;host&gt;用&lt;username&gt;这个用户</span><br><span class="line">scp &lt;file&gt; &lt;user&gt;@&lt;host&gt;:/remote/path : 复制文件给一个远程主机</span><br></pre></td></tr></table></figure></p>
+<p><strong>8.搜索文件和文本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find &lt;dir&gt; -name &lt;&quot;file&quot;&gt; : 发现目录&lt;dir&gt;内文件名为&lt;file&gt;的所有文件.可以使用（*）去搜索文件名部分,如：`find demo01 -name &quot;*.png&quot;`</span><br><span class="line">grep &quot;&lt;text&gt;&quot; &lt;file&gt; : 输出在file中出现的所有&lt;text&gt;文本（添加 -i大小写不敏感）</span><br><span class="line">grep -rl &quot;&lt;text&gt;&quot; &lt;dir&gt; : 搜索&lt;dir&gt;包含&lt;text&gt;文本的所有文件</span><br></pre></td></tr></table></figure></p>
+<p><strong>9.输出文件内容</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;file&gt; : 输出文件的内容</span><br><span class="line">less &lt;file&gt; : 使用less命令输出&lt;file&gt;内容，支持分页和更多</span><br><span class="line">head &lt;file&gt; : 输出前10行</span><br></pre></td></tr></table></figure></p>
+<p><strong>10.历史命令查找</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + R ： 搜索之前使用的命令</span><br><span class="line">history n : 展出之前使用过的命令，n为指定查询的条数</span><br><span class="line">![value] : 执行以一个值开头的最后一个被写的命令</span><br><span class="line">!! : 执行最后一个命令</span><br></pre></td></tr></table></figure></p>
+<p><strong>11.查看帮助</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[command] -h : 帮助文档，如git -h</span><br><span class="line">man [command] :展示该命令的帮助手册 ,进入帮助手册后按`wq`退出</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>参考：<a href="https://www.makeuseof.com/tag/mac-terminal-commands-cheat-sheet/" target="_blank" rel="noopener">The Mac Terminal Commands Cheat Sheet</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/06/webstorm-concise-introduction/" rel="next" title="WebStorm | 一分钟入门WebStorm">
+                <i class="fa fa-chevron-left"></i> WebStorm | 一分钟入门WebStorm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/lorne-zhang.jpg" alt="Lorne Zhang">
+          <p class="site-author-name" itemprop="name">Lorne Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">日拱一卒</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-amp-Bash"><span class="nav-number">1.</span> <span class="nav-text">Shell &amp; Bash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac下命令行的基本使用"><span class="nav-number">2.</span> <span class="nav-text">Mac下命令行的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷键"><span class="nav-number">2.1.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本指令"><span class="nav-number">2.2.</span> <span class="nav-text">基本指令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lorne Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
