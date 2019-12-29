@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Webpack是现代JavaScript应用的静态模打包器。它能够内建一个被称为dependency  graph的依赖关系图并生成一个或多个包。作为前端开发者，我们经常和它打交道，理解它如何工作可以使我们更好的处理我们的代码。今天我们通过一个简化版的模块打包器来理解一些它的底层逻辑。 模块打包器摘要步骤官网给了我们一个简化版的模块打包器的例子，大体上分为三个步骤：  查找资源依赖：通过JavaS">
+<meta name="keywords" content="LorneNote">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极简Webpack | 手写打包器">
+<meta property="og:url" content="https://lornenote.com/2019/12/29/minipack-module-bundler/index.html">
+<meta property="og:site_name" content="LorneNote">
+<meta property="og:description" content="Webpack是现代JavaScript应用的静态模打包器。它能够内建一个被称为dependency  graph的依赖关系图并生成一个或多个包。作为前端开发者，我们经常和它打交道，理解它如何工作可以使我们更好的处理我们的代码。今天我们通过一个简化版的模块打包器来理解一些它的底层逻辑。 模块打包器摘要步骤官网给了我们一个简化版的模块打包器的例子，大体上分为三个步骤：  查找资源依赖：通过JavaS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lornenote.com/2019/12/29/minipack-module-bundler/屏幕快照%202019-12-21%2017.30.56.png">
+<meta property="og:image" content="https://lornenote.com/2019/12/29/minipack-module-bundler/屏幕快照%202019-12-14%2018.38.40.png">
+<meta property="og:updated_time" content="2019-12-29T15:31:49.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极简Webpack | 手写打包器">
+<meta name="twitter:description" content="Webpack是现代JavaScript应用的静态模打包器。它能够内建一个被称为dependency  graph的依赖关系图并生成一个或多个包。作为前端开发者，我们经常和它打交道，理解它如何工作可以使我们更好的处理我们的代码。今天我们通过一个简化版的模块打包器来理解一些它的底层逻辑。 模块打包器摘要步骤官网给了我们一个简化版的模块打包器的例子，大体上分为三个步骤：  查找资源依赖：通过JavaS">
+<meta name="twitter:image" content="https://lornenote.com/2019/12/29/minipack-module-bundler/屏幕快照%202019-12-21%2017.30.56.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lornenote.com/2019/12/29/minipack-module-bundler/">
+
+
+
+
+
+  <title>极简Webpack | 手写打包器 | LorneNote</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LorneNote</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">通往互联网自由之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/12/29/minipack-module-bundler/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">极简Webpack | 手写打包器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-29T23:23:10+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Webpack是现代JavaScript应用的静态模打包器。它能够内建一个被称为<code>dependency  graph</code>的依赖关系图并生成一个或多个包。作为前端开发者，我们经常和它打交道，理解它如何工作可以使我们更好的处理我们的代码。今天我们通过一个简化版的模块打包器来理解一些它的底层逻辑。</p>
+<h2 id="模块打包器摘要步骤"><a href="#模块打包器摘要步骤" class="headerlink" title="模块打包器摘要步骤"></a>模块打包器摘要步骤</h2><p>官网给了我们一个<a href="https://github.com/ronami/minipack" target="_blank" rel="noopener">简化版的模块打包器的例子</a>，大体上分为三个步骤：</p>
+<ol>
+<li>查找资源依赖：<br>通过<code>JavaScript parsers</code>生成的抽象语法树（AST- abstract syntax tree），来读取代码的内容和依赖。<br>这里面会做一些设置模块唯一标识（<code>a unique Identifier</code>）以及使用Babel将ECMAScript模块语法转化为能在当前浏览器运行的语法等操作。</li>
+<li>绘制依赖关系图<br>取出模块的依赖包以及该依赖包所依赖的其他依赖。找出这个关系的过程称为<code>the dependency graph</code>。<br>这里会从入口文件开始，使用for循环依次遍历它的依赖，直到为空，找出每一个依赖的相对路径，拼接为完整路径，找出该路径下的资源，依次把他们添加到关系图当中的队列里。</li>
+<li>将依赖封包<br>使用我们创建的依赖关系图生成可以在浏览器环境下运行的包。完整内容查看<a href="https://github.com/ronami/minipack" target="_blank" rel="noopener">Detailed Explanation of a Simple Module Bundler</a>，视频链接：<a href="https://www.youtube.com/watch?v=Gc9-7PBqOC8" target="_blank" rel="noopener">Live Coding a Simple Module Bundler</a>。</li>
+</ol>
+<h2 id="手写一个简单的Webpack"><a href="#手写一个简单的Webpack" class="headerlink" title="手写一个简单的Webpack"></a>手写一个简单的Webpack</h2><p>首先找一个地方创建项目文件夹，随便命名比如：<code>minipack-demo</code><br>而后在文件夹内创建一个package.json文件，文件内容如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;minipack&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;author&quot;: &quot;Lorne Zhang&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;MIT&quot;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;babel-core&quot;: &quot;^6.26.0&quot;,</span><br><span class="line">    &quot;babel-preset-env&quot;: &quot;^1.6.1&quot;,</span><br><span class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.24.1&quot;,</span><br><span class="line">    &quot;babel-traverse&quot;: &quot;^6.26.0&quot;,</span><br><span class="line">    &quot;babylon&quot;: &quot;^6.18.0&quot;,</span><br><span class="line">    &quot;eslint&quot;: &quot;^4.17.0&quot;,</span><br><span class="line">    &quot;eslint-config-airbnb-base&quot;: &quot;^12.1.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-import&quot;: &quot;^2.8.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;eslint-config-prettier&quot;: &quot;^2.9.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-prettier&quot;: &quot;^2.6.0&quot;,</span><br><span class="line">    &quot;prettier&quot;: &quot;^1.10.2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而后在控制台执行<code>npm install</code>安装依赖。</p>
+<p>依赖安装完成后，我们就有了开发环境，接下来我们写一个简单的模拟程序，首先创建三个文件JS文件，名称和内容如下：</p>
+<p><strong>name.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export const name = &apos;world&apos;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>message.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;name&#125; from &apos;./name.js&apos;;</span><br><span class="line"></span><br><span class="line">export default `hello $&#123;name&#125;!`;</span><br></pre></td></tr></table></figure></p>
+<p><strong>entry.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import message from &apos;./message.js&apos;;</span><br><span class="line"></span><br><span class="line">console.log(message);</span><br></pre></td></tr></table></figure></p>
+<p>如上这三个文件是互相依赖的关系。</p>
+<p>而后，我们创建文件<code>bundle.js</code>,用于写我们的打包代码：整个项目的目录结构看起来是这样的：<br><img src="/2019/12/29/minipack-module-bundler/屏幕快照 2019-12-21 17.30.56.png" alt="Alt text"></p>
+<p>到此我们正式写我们的核心逻辑–打包器代码：</p>
+<p><strong>bundle.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 模块打包器将小的程序段编译成浏览器可以执行的更大更复杂的程序。</span><br><span class="line"> * 这些小块仅仅是Javascript文件和模块之间的依赖。</span><br><span class="line"> * （https://webpack.js.org/concepts/modules）。</span><br><span class="line"> *</span><br><span class="line"> * 模块打包器有一个入口文件的概念。代替在浏览器中添加一些脚本标签</span><br><span class="line"> * 并且让他们运行，我们告诉打包器哪个文件是应用的主文件，这是引导</span><br><span class="line"> * 整个应用程序的文件。</span><br><span class="line"> *</span><br><span class="line"> * 我们的打包器将从这个入口文件开始，它尝试去理解文件直接的依赖。</span><br><span class="line"> * 然后，它尝试去理解文件依赖的依赖。它会持续的这么做直到算出应用</span><br><span class="line"> * 的每个模块以及和其他模块的依赖关系。</span><br><span class="line"> *</span><br><span class="line"> * 这种理解工程的方式称为 dependency graph(依赖关系图).</span><br><span class="line"> *</span><br><span class="line"> * 在这个例子里，我们讲创建一个依赖关系图并且将它的所有模块打包到</span><br><span class="line"> * 一个包里。</span><br><span class="line"> *</span><br><span class="line"> * 让我们开始吧</span><br><span class="line"> *</span><br><span class="line"> * 请注意：这是一个非常简单的例子。像依赖循环、捕获模块导出，解析</span><br><span class="line"> * 每个模块我们仅仅处理一次，以便让例子尽可能的简单。</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const babylon = require(&apos;babylon&apos;)</span><br><span class="line">const traverse = require(&apos;babel-traverse&apos;).default</span><br><span class="line">const babel = require(&apos;babel-core&apos;)</span><br><span class="line"></span><br><span class="line">let ID = 0;</span><br><span class="line">// 我们从创建一个函数开始，它会接受一个文件路径，读取它的内容</span><br><span class="line">// 并且取出它的依赖</span><br><span class="line">function createAsset(filename) &#123;</span><br><span class="line">  // 读取文件内容作为一个字符串</span><br><span class="line">  const content = fs.readFileSync(filename, &apos;utf-8&apos;);</span><br><span class="line"></span><br><span class="line">  // 现在，我们尝试计算出这个文件所依赖的文件。我们可以通过它的字符串导入</span><br><span class="line">  // 的方式来查看。然后，这是笨方法，因此，我们可以使用一个JavaScript解析器。</span><br><span class="line">  //</span><br><span class="line">  // JavaScript解析器是一个可以读取和理解JavaScript代码的工具。它可以</span><br><span class="line">  // 帮我们把代码生成一个更抽象的模型称为AST(abstract syntax tree--抽象语法树)。</span><br><span class="line">  //</span><br><span class="line">  // 我强烈建议你使用AST Explorer（http://astexplorer.net）看看AST的样子。</span><br><span class="line">  // AST 包含了我们代码的很多信息。我们可以通过查询它来理解我们的代码试图做什么。</span><br><span class="line">  const ast = babylon.parse(content, &#123;</span><br><span class="line">    sourceType: &apos;module&apos;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  // 这个数组将管理这个模块所依赖的模块的相对路径</span><br><span class="line">  const dependencies = [];</span><br><span class="line"></span><br><span class="line">  // 我们遍历AST，试图理解这个模块依赖了哪些模块，为此，</span><br><span class="line">  // 我们检查AST上的每一个重要声明。</span><br><span class="line">  traverse(ast,&#123;</span><br><span class="line">    // EcmaScript 模块是相当容易的，因为他们是静态的。这意味着你并不需要导入一</span><br><span class="line">    // 个变量， 或可选的导入另一个模块。每次我们看到一个导入声明，我们仅仅接纳</span><br><span class="line">    // 它的值作为一个依赖.</span><br><span class="line">    ImportDeclaration:(&#123;node&#125;)=&gt; &#123;</span><br><span class="line">      // 我们把这个值放进一个依赖数组中。</span><br><span class="line">      dependencies.push(node.source.value);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  // 通过创建一个简单的累加器，我们为这个模块分配一个唯一标识符。</span><br><span class="line">  const id = ID++;</span><br><span class="line">  // 我们使用的ECMASript模块和其他的JavaScript功能可能并没有被所有的浏览器支持。</span><br><span class="line">  // 为了确保我们的包在所有的浏览器都可以运行，我们将用babel转换它</span><br><span class="line">  //（看https://babeljs.io）</span><br><span class="line">  //</span><br><span class="line">  // ‘presets’操作性是一个规则集合，它告诉babel怎么样转换我们的代码。我们用</span><br><span class="line">  // ‘babel-preset-env’来把我们的代码转换成大多数浏览器可以运行的代码。</span><br><span class="line">  const &#123;code&#125; = babel.transformFromAst(ast, null, &#123;</span><br><span class="line">    presets: [&apos;env&apos;],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  // 返回关于这个模块的所有信息</span><br><span class="line">  return &#123;</span><br><span class="line">    id,</span><br><span class="line">    filename,</span><br><span class="line">    dependencies,</span><br><span class="line">    code,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 现在我们能够提取一个模块的依赖，我们会继续提取入口文件的依赖。</span><br><span class="line">//</span><br><span class="line">// 然后，我们继续提取它的依赖的每一个依赖。我们依次进行直到计算出</span><br><span class="line">// 应用程序的每一个依赖并且他们如何依赖其他的模块。这个理解过程称</span><br><span class="line">// 依赖图。</span><br><span class="line">function createGraph(entry) &#123;</span><br><span class="line">  // 从解析依赖的入口文件开始</span><br><span class="line">  const mainAsset = createAsset(entry);</span><br><span class="line"></span><br><span class="line">  // 我们使用一个队列去解析每一个资源的依赖。为此我们使用入口资源</span><br><span class="line">  // 定义一个数组。</span><br><span class="line">  const queue = [mainAsset];</span><br><span class="line">  // 我们使用一个‘for ... of’循环去迭代这个队列。最初的队列只有</span><br><span class="line">  // 一个资源，但是随着我们的迭代它将加入新资源到队列中。当队列为</span><br><span class="line">  // 空循环终止。</span><br><span class="line">  for(const asset of queue) &#123;</span><br><span class="line">    // 我们的每一个资源有它所依赖的模块的相对路径列表。我们要对他</span><br><span class="line">    // 们进行迭代，解析他们用我们的‘createAsset()’函数，追踪这</span><br><span class="line">    // 个模块在此对象中的依赖。</span><br><span class="line">    asset.mapping = &#123;&#125;;</span><br><span class="line">    // 这是这个模块所在的目录</span><br><span class="line">    const dirname = path.dirname(asset.filename);</span><br><span class="line">    // 我们遍历其依赖项的相对路径列表。</span><br><span class="line">    asset.dependencies.forEach(relationPath =&gt; &#123;</span><br><span class="line">      // 我们的‘createAsset()’函数希望一个绝对路径。依赖数组是</span><br><span class="line">      // 一个相对路径依赖数组。这些路径相对于导入他们的文件。我们</span><br><span class="line">      // 通过加入他的父资源的目录路径可以把它的相对路径转换为绝对</span><br><span class="line">      // 路径。</span><br><span class="line">      const absolutePath = path.join(dirname, relationPath);</span><br><span class="line">      // 解析资源，读取它的内容，提取它的依赖。</span><br><span class="line">      const child = createAsset(absolutePath);</span><br><span class="line">      // 知道资源所依赖的&apos;子资源&apos;对我们来说是必要的。我们通过给</span><br><span class="line">      // &apos;mapping&apos;对象用子资源的id添加一个新属性来表达这种关系。</span><br><span class="line">      asset.mapping[relationPath] = child.id;</span><br><span class="line"></span><br><span class="line">      // 最后，我们添加子资源到我们的队列，因此它的依赖项也将被迭</span><br><span class="line">      // 代和解析。</span><br><span class="line">      queue.push(child);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 此时，队列只是包含目标应用程序中每个模块的组数。</span><br><span class="line">  return queue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 接下来，我们定义一个函数，将使用我们的依赖图并且返回一个浏览器可以</span><br><span class="line">// 运行的包。</span><br><span class="line">//</span><br><span class="line">// 我们的包仅仅是一个自我调用的函数：</span><br><span class="line">//</span><br><span class="line">// (function() &#123;&#125;)()</span><br><span class="line">//</span><br><span class="line">// 函数将接收仅仅一个参数：携带我们关系图中每一个模块信息的对象</span><br><span class="line">function bundle(graph) &#123;</span><br><span class="line">  let modules = &apos;&apos;;</span><br><span class="line"></span><br><span class="line">  // 在我们得到我们的函数体之前，我们讲构造这种参数。请注意我们</span><br><span class="line">  // 正在构建的这个字符串被两个花括号包装。因此对于每一个模块，</span><br><span class="line">  // 我们添加一个这种形式的字符串：‘key:value’。</span><br><span class="line">  graph.forEach(mod =&gt; &#123;</span><br><span class="line">    // 关系图中的每一模块在这个对象中都有一个入口。我们使用模块</span><br><span class="line">    // id作为key，使用一个数组作为值（我们的每个模块有两个值）</span><br><span class="line">    //</span><br><span class="line">    // 第一个值是用函数封装的每一个模块的代码，这是因为模块的作</span><br><span class="line">    // 用域应该是：在一个模块中定义的变量不应该影响其他的作用域</span><br><span class="line">    // 或全局作用域。</span><br><span class="line">    //</span><br><span class="line">    // 我们的模块，我们转换他们之后，使用CommonJS 模块系统：</span><br><span class="line">    // 他们希望一个‘require’，一个‘module’和一个&apos;exports&apos;</span><br><span class="line">    // 对象可用。这些在浏览器中通常是不可用的，因此我们将实现</span><br><span class="line">    // 他们并且把他们注入我们的函数封装器。</span><br><span class="line"></span><br><span class="line">    // 对于第二个值，我们字符串化了模块和它的依赖之间的映射。这</span><br><span class="line">    // 是一个对象，看起来像这样：</span><br><span class="line">    // &#123;&apos;./relative/path&apos;:1 &#125;。</span><br><span class="line">    //</span><br><span class="line">    // 这是因为被转换的模块代码以及调用了携带相对路径的‘require’.</span><br><span class="line">    // 当这个函数被调用时，我们应该能够知道和模块一致的这个模块的</span><br><span class="line">    // 相对路径。</span><br><span class="line">    modules +=  `$&#123;mod.id&#125;: [</span><br><span class="line">       function (require, module, exports) &#123;</span><br><span class="line">         $&#123;mod.code&#125;</span><br><span class="line">       &#125;,</span><br><span class="line">        $&#123;JSON.stringify(mod.mapping)&#125;,</span><br><span class="line">     ],`;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  // 最后，我们实现这个自我调用函数。</span><br><span class="line">  //</span><br><span class="line">  // 我们通过创建‘require()’函数开始：它接受一个模块id并且查找它</span><br><span class="line">  // 在我们之前构造的模块对象。我们讲解构我两个值的数组来得到我们的</span><br><span class="line">  // 函数封装器和映射对象。</span><br><span class="line">  //</span><br><span class="line">  // 我们的模块代码调用携带相对路径的‘require()’代替模块的id。我</span><br><span class="line">  // 们的require函数需要模块ids。此外，两个模块可能‘require()’</span><br><span class="line">  // 相同的相对路径但意味着不同的模块。</span><br><span class="line">  //</span><br><span class="line">  // 为了处理这个，但一个模块被需要的时候我们创建一个新的，使用专用</span><br><span class="line">  // 的‘require’函数让它去使用。它将特定于该模块，并且知道如何使用</span><br><span class="line">  // 模块的映射对象转换相对路径为模块的映射对象。</span><br><span class="line">  //</span><br><span class="line">  // 最后，用CommonJS，当一个模块被需要时，它能够通过可变的它的</span><br><span class="line">  // ‘exports’导出它的值.&apos;exports&apos;对象，它通过模块代码更改之后，</span><br><span class="line">  // 被通过&apos;require()&apos;函数返回。</span><br><span class="line">  const result = `</span><br><span class="line">    (function(modules) &#123;</span><br><span class="line">      function require(id) &#123;</span><br><span class="line">        const [fn, mapping] = modules[id];</span><br><span class="line"></span><br><span class="line">        function localRequire(relationPath) &#123;</span><br><span class="line">          return require(mapping[relationPath]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        const module = &#123; exports: &#123;&#125; &#125;;</span><br><span class="line"></span><br><span class="line">        fn(localRequire,module,module.exports);</span><br><span class="line"></span><br><span class="line">        return module.exports;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      require(0);</span><br><span class="line">    &#125;)(&#123;$&#123;modules&#125;&#125;)</span><br><span class="line">  `;</span><br><span class="line"></span><br><span class="line">  // 我们只是返回结果，OK！</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const graph = createGraph(&apos;./example/entry.js&apos;);</span><br><span class="line">const result = bundle(graph);</span><br><span class="line"></span><br><span class="line">console.log(result);</span><br></pre></td></tr></table></figure>
+<p>不再多说，每一步注解已非常详细。在控制台执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node bundle.js</span><br></pre></td></tr></table></figure></p>
+<p>生成如下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">(function(modules) &#123;</span><br><span class="line">      function require(id) &#123;</span><br><span class="line">        const [fn, mapping] = modules[id];</span><br><span class="line"></span><br><span class="line">        function localRequire(relationPath) &#123;</span><br><span class="line">          return require(mapping[relationPath]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        const module = &#123; exports: &#123;&#125; &#125;;</span><br><span class="line"></span><br><span class="line">        fn(localRequire,module,module.exports);</span><br><span class="line"></span><br><span class="line">        return module.exports;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      require(0);</span><br><span class="line">    &#125;)(&#123;0: [</span><br><span class="line">       function (require, module, exports) &#123;</span><br><span class="line">         &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">var _message = require(&quot;./message.js&quot;);</span><br><span class="line"></span><br><span class="line">var _message2 = _interopRequireDefault(_message);</span><br><span class="line"></span><br><span class="line">function _interopRequireDefault(obj) &#123; return obj &amp;&amp; obj.__esModule ? obj : &#123; default: obj &#125;; &#125;</span><br><span class="line"></span><br><span class="line">console.log(_message2.default);</span><br><span class="line">       &#125;,</span><br><span class="line">        &#123;&quot;./message.js&quot;:1&#125;,</span><br><span class="line">     ],1: [</span><br><span class="line">       function (require, module, exports) &#123;</span><br><span class="line">         &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(exports, &quot;__esModule&quot;, &#123;</span><br><span class="line">  value: true</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var _name = require(&quot;./name.js&quot;);</span><br><span class="line"></span><br><span class="line">exports.default = &quot;hello &quot; + _name.name + &quot;!&quot;;</span><br><span class="line">       &#125;,</span><br><span class="line">        &#123;&quot;./name.js&quot;:2&#125;,</span><br><span class="line">     ],2: [</span><br><span class="line">       function (require, module, exports) &#123;</span><br><span class="line">         &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(exports, &quot;__esModule&quot;, &#123;</span><br><span class="line">  value: true</span><br><span class="line">&#125;);</span><br><span class="line">var name = exports.name = &apos;world&apos;;</span><br><span class="line">       &#125;,</span><br><span class="line">        &#123;&#125;,</span><br><span class="line">     ],&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>如上，这是可以在浏览器下直接运行的编译后代码，将这段代码丢进浏览器的控制台可以直接查看运行结果：<br><img src="/2019/12/29/minipack-module-bundler/屏幕快照 2019-12-14 18.38.40.png" alt="Alt text"></p>
+<p>That’s OK！中文版完整程序查看<a href="https://github.com/Lorne-Zhang/minipack-demo" target="_blank" rel="noopener">minipack-demo</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/nvm-npm-introduction /" rel="next" title="nvm & npm 使用教程">
+                <i class="fa fa-chevron-left"></i> nvm & npm 使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/lorne-zhang.jpg" alt="Lorne Zhang">
+          <p class="site-author-name" itemprop="name">Lorne Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">日拱一卒</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块打包器摘要步骤"><span class="nav-number">1.</span> <span class="nav-text">模块打包器摘要步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手写一个简单的Webpack"><span class="nav-number">2.</span> <span class="nav-text">手写一个简单的Webpack</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lorne Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
