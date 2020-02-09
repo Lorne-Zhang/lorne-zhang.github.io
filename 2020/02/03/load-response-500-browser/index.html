@@ -105,7 +105,11 @@
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580731775688.png">
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580732593163.png">
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580734080458.png">
-<meta property="og:updated_time" content="2020-02-03T14:31:39.697Z">
+<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580743884664.png">
+<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580743949016.png">
+<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744322261.png">
+<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744616012.png">
+<meta property="og:updated_time" content="2020-02-09T03:01:16.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器查看 Status Code 500 响应信息">
 <meta name="twitter:description" content="在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。 但当Status Code：500的时候，我们发现在Chrome下，响应信息是这样的：  在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究">
@@ -332,6 +336,18 @@
 <p>这些响应信息有助于后端开发人员快速排查错误，于是决定查一下问题的原因，最初的想法是看看Chrome浏览器是否能够显示500的响应信息，是不是需要设置什么东西或利用第三方插件，如果能直接查看最好，省去了<strong>Postman</strong>再走一遍请求。</p>
 <p>最先查看了一下<strong>Chrome Developers</strong>下的<strong>Network</strong>主题，似乎没有涉及相关内容。于是求助于Google搜索，看到这个解释：<a href="https://stackoverflow.com/questions/30754828/unable-to-load-response-for-500-internal-server-error-in-chrome#" target="_blank" rel="noopener">Unable to load response for 500 internal server error in chrome</a>，具体看第一个回答。大意是这是<code>Chrome</code>本身的问题，如果响应块没有正确的结束，那么Chrome就不会读取它，但是<code>Firefox</code>和<code>Safari</code>内部处理了这个问题，这就清楚了，因为服务端出现了500内部错误，响应流被中断，没有完整的响应，自然无法读取。文中给出了由后端人员来解决这个问题，这超出了我们讨论的范畴，我们先看看在Safari下的响应结果：<br><img src="/2020/02/03/load-response-500-browser/1580734080458.png" alt="Alt text"></p>
 <p>没错，的确可以查看，那么问题的答案就很清楚了。下次出现500错误，想给后端开发人员提供响应信息的时候，你有两种解决方案：在<code>Safari</code>或<code>Firefox</code>浏览器下运行程序，查看返回；或使用<code>Postman</code>等第三方请求模拟工具获取，至于<code>Chrome</code>本身是不支持查看500响应的。</p>
+<hr>
+<p><strong>后记于2020-02-03 晚上 11：26分 北京东亚创展国际（修正结论）</strong></p>
+<p>今天是春节过后第一天上班，真的是十分囧呀。本来打算把上面的这篇文章发blog而后在公众号上发一个副本。</p>
+<p>可刚刚竟然发现测试环境下500状态码是可以查看响应的，仔细查看了一下测试环境和本地环境两者的区别，发现我之前的观察和结论是有误的：</p>
+<p>我们先来看一下本地环境下Console的打印：</p>
+<p><img src="/2020/02/03/load-response-500-browser/1580743884664.png" alt="Alt text"></p>
+<p>我们再来看一下测试环境下Console的报错打印：<br><img src="/2020/02/03/load-response-500-browser/1580743949016.png" alt="Alt text"></p>
+<p>那么测试环境和本地环境到底有什么不同呢，本地环境使用<strong>localhost:8080</strong>访问URL，由于服务器的请求URL域名和我本地的<strong>localhost</strong>域名不同，因此服务端是需要做跨域配置的。而测试环境直接使用<code>http://activity.delightful**</code>域名头访问网站，在当前数据请求URL与网站地址域名一致，因此不需要做跨域配置。</p>
+<p>在本地环境下，由于需要做跨域配置，因此请求会发送两次，一次返回204允许跨域，而后返回响应数据。而在第二次返回响应数据的时候，由于服务端发生错误，因此响应头并未配置跨域信息，所以报了跨域被阻止，</p>
+<p><img src="/2020/02/03/load-response-500-browser/1580744322261.png" alt="Alt text"><br>正常情况下应该是如下这样的，<strong>注意Response Headers栏</strong>：<br><img src="/2020/02/03/load-response-500-browser/1580744616012.png" alt="Alt text"></p>
+<p>由于跨域被阻止，自然没有返回数据，因此本机环境没有响应信息。而测试环境，不存在跨域问题，所以直接返回了500错误，并可以查看响应。</p>
+<p><strong>综上：不能查看响应的原因是本地环境下，由于请求失败，缺失跨域所需要的响应头，因此响应被浏览器拦截。因此无法查看响应。与Chrome浏览器无关。</strong></p>
 
       
     </div>
