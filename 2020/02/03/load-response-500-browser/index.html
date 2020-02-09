@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580743949016.png">
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744322261.png">
 <meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744616012.png">
-<meta property="og:updated_time" content="2020-02-09T03:01:16.430Z">
+<meta property="og:updated_time" content="2020-02-09T03:06:00.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器查看 Status Code 500 响应信息">
 <meta name="twitter:description" content="在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。 但当Status Code：500的时候，我们发现在Chrome下，响应信息是这样的：  在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究">
@@ -338,7 +338,7 @@
 <p>没错，的确可以查看，那么问题的答案就很清楚了。下次出现500错误，想给后端开发人员提供响应信息的时候，你有两种解决方案：在<code>Safari</code>或<code>Firefox</code>浏览器下运行程序，查看返回；或使用<code>Postman</code>等第三方请求模拟工具获取，至于<code>Chrome</code>本身是不支持查看500响应的。</p>
 <hr>
 <p><strong>后记于2020-02-03 晚上 11：26分 北京东亚创展国际（修正结论）</strong></p>
-<p>今天是春节过后第一天上班，真的是十分囧呀。本来打算把上面的这篇文章发blog而后在公众号上发一个副本。</p>
+<p>今天是春节过后第一天上班，真的是十分囧呀。本来打算把上面的这篇文章发blog而后在公众号上发一个副本后睡觉。</p>
 <p>可刚刚竟然发现测试环境下500状态码是可以查看响应的，仔细查看了一下测试环境和本地环境两者的区别，发现我之前的观察和结论是有误的：</p>
 <p>我们先来看一下本地环境下Console的打印：</p>
 <p><img src="/2020/02/03/load-response-500-browser/1580743884664.png" alt="Alt text"></p>
