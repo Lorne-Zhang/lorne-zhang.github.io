@@ -254,6 +254,133 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/02/19/vue-development-production-config/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/19/vue-development-production-config/" itemprop="url">Vue系列 | 开发环境与生产环境的构建配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T00:20:07+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="定义开发环境变量"><a href="#定义开发环境变量" class="headerlink" title="定义开发环境变量"></a>定义开发环境变量</h3><p>项目根目录下，新建<code>.env.development</code>文件，用于开发环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagertest/</span><br></pre></td></tr></table></figure></p>
+<p>这里<code>VUE_APP_</code>前缀名称是固定的，不可以改变，这里我们以定义一个公共文件路径为例说明。</p>
+<h3 id="定义生产环境变量"><a href="#定义生产环境变量" class="headerlink" title="定义生产环境变量"></a>定义生产环境变量</h3><p>项目根目录下，新建<code>.env.production</code>文件，用于产生环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagerrelease/</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用环境变量"><a href="#使用环境变量" class="headerlink" title="使用环境变量"></a>使用环境变量</h3><p>例如：我们在<code>vue.config.js</code>下使用该变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  publicPath: process.env.VUE_APP_PUBLIC_PATH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>process.env.APP_PUBLIC_PATH</code>会在项目启动时自动加载，但问题是它怎么知道使用哪个环境的路径呢，所以我们还需做如下配置。</p>
+<h3 id="配置启动命令"><a href="#配置启动命令" class="headerlink" title="配置启动命令"></a>配置启动命令</h3><p>在 <strong>package.json</strong>文件中，配置<strong>scripts</strong>启动脚本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;serve&quot;: &quot;vue-cli-service serve&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;vue-cli-service build --mode development&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;vue-cli-service build&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p><strong>npm run serve</strong>: 启动本地环境，可用于本地调试。<br><strong>npm run dev</strong>: 打包构建，这里我们指定了 <code>--mode development</code>，意味着我们在开发环境，此时<code>.env.development</code>相关配置生效。<br><strong>npm run build</strong>: 打包构建，如果没有指定<code>mode</code>，默认构建生产环境，所以我们的<code>.env.production</code>相关配置生效。当然，我们也可以手动指定 <code>--mode production</code>。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>综上，<br>对于开发环境部署，使用<code>npm run dev</code>构建版本，<br>对于生产环境部署，使用<code>npm run build</code>构建版本。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/02/03/load-response-500-browser/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2014,151 +2141,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/08/31/vue-custom-directives/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lorne Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/lorne-zhang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LorneNote">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/31/vue-custom-directives/" itemprop="url">Vue系列 | 自定义指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-31T19:55:55+08:00">
-                2019-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>操作底层DOM</li>
-</ul>
-<p>代码复用和抽象的主要形式是组件，有时候需要自定义指令来操作底层DOM。<br>让我们看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line">&lt;input v-focus/&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 在组件的JS代码中自定义指令focus</span><br><span class="line">export default &#123;</span><br><span class="line">    directives: &#123;</span><br><span class="line">      focus: &#123;</span><br><span class="line">        // directive definition</span><br><span class="line">        inserted: function (el) &#123;</span><br><span class="line">          el.focus()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码的作用是进入页面的时候输入框会自动获取焦点，即处于输入状态，注意，在使用的时候，Vue会自动在我们的指令前面加上前缀<code>v-</code>，所以使用是指令表示为<code>v-focus</code>。</p>
-<h3 id="钩子函数与钩子参数"><a href="#钩子函数与钩子参数" class="headerlink" title="钩子函数与钩子参数"></a>钩子函数与钩子参数</h3><p>与组件的操作过程类似，钩子用于处理底层DOM，所以天生携带组件的生命体征，即我们也会像操作组件一样来处理我们的指令，找到对应的时机：包含绑定指令，插入元素，数据更新，组件更新和解绑指令，这些表现为函数形式，操作我们的数据，表现为在相应的函数里传递和操作参数。</p>
-<p>具体函数如下：<br><code>bind</code>：顾名思义，绑定我们定义的指令到元素上，而且整个生命周期中只会绑定一次，我们可以在这里做一些一次性的创建工作。<br><code>inserted</code>：当绑定元素已经插入到它的父节点的时候调用（它只保证父节点存在，不一定在文档中）。<br><code>update</code>：包含组队的VNode被更新的时候调用，但是可能会在子组件更新之前调用。指令的值可能改变也可能不改变。<br><code>componentUpdated</code>：包含组件的VNode和VNodes的子组件更新后调用。<br><code>unbind</code>：仅调用一次，和<code>bind</code>相对，自定义指令从元素解绑时调用。</p>
-<p>有了这些函数，我们就可以在对应的阶段执行一些处理DOM的操作。要操作DOM我们还需要这些函数传递的参数，我们通过一个例子来认识这些参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line">&lt;div v-demo:foo.a.b=&quot;message&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// JS</span><br><span class="line">  export default &#123;</span><br><span class="line">    directives: &#123;</span><br><span class="line">      demo: &#123;</span><br><span class="line">        bind: function (el, binding, vnode) &#123;</span><br><span class="line">          var s = JSON.stringify</span><br><span class="line">          el.innerHTML =</span><br><span class="line">            &apos;name:&apos; + s(binding.name) + &apos;&lt;br&gt;&apos; +</span><br><span class="line">            &apos;value:&apos; + s(binding.value) + &apos;&lt;br&gt;&apos; +</span><br><span class="line">            &apos;expression:&apos; + s(binding.expression) + &apos;&lt;br&gt;&apos; +</span><br><span class="line">            &apos;argument:&apos; + s(binding.arg) + &apos;&lt;br&gt;&apos; +</span><br><span class="line">            &apos;modifiers:&apos; + s(binding.modifiers) + &apos;&lt;br&gt;&apos; +</span><br><span class="line">            &apos;vnode keys:&apos; + Object.keys(vnode).join(&apos;, &apos;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;  </span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &apos;hello!&apos;,</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>打印结果：</strong><br>name:”demo”<br>value:”hello!”<br>expression:”message”<br>argument:”foo”<br>modifiers:{“a”:true,”b”:true}<br>vnode keys:tag, data, children, text, elm, ns, context, fnContext, fnOptions, fnScopeId, key, componentOptions, componentInstance, parent, raw, isStatic, isRootInsert, isComment, isCloned, isOnce, asyncFactory, asyncMeta, isAsyncPlaceholder</p>
-<hr>
-<p>结合上面的例子，我们来认识这些参数：<br><code>el</code>：指令绑定的元素，可以用它来直接操作DOM<br><code>vnode</code>:通过Vue的编译器产生的虚拟DOM节点<br><code>oldVnode</code>:之前的虚拟节点，仅在<code>update</code>和<code>componentUpdated</code>函数可用</p>
-<p><code>binding</code>：一个对象，包含如下属性：</p>
-<blockquote>
-<p><code>name</code>：指令名称，没有-v前缀，如”demo”<br><code>value</code>: 传递给指令的值，如”hello!”<br><code>expression</code>:绑定的表达式，用字符串表示，如上：”message”<br><code>arg</code>:传递给指令的参数，如”foo”<br><code>modifiers</code>:一个包含修饰符的对象，如上的修饰符对象是{“a”:true,”b”:true}<br><code>oldValue</code>：之前的值，仅在<code>update</code>和<code>componentUpdated</code>函数可用，无论值是否改变它都是可用的。</p>
-</blockquote>
-<p><code>注意</code>：<br>除了<code>el</code>，其他的要素不要修改，作为只读属性。</p>
-<h4 id="动态指令参数"><a href="#动态指令参数" class="headerlink" title="动态指令参数"></a>动态指令参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line">&lt;p&gt;向下滚动页面&lt;/p&gt;</span><br><span class="line">&lt;p v-pin:[direction]=&quot;200&quot;&gt;让我从页面的200像素处开始&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// JS</span><br><span class="line">  export default &#123;</span><br><span class="line">    directives: &#123;</span><br><span class="line">      pin: &#123;</span><br><span class="line">        bind: function (el, binding) &#123;</span><br><span class="line">          el.style.position = &apos;fixed&apos;</span><br><span class="line">          var s = (binding.arg == &apos;left&apos; ? &apos;left&apos;:&apos;top&apos;)</span><br><span class="line">          el.style[s] = binding.value + &apos;px&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        direction: &apos;top&apos;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/08/31/vue-custom-directives/vue-custom-directives.png" alt="Alt text"></p>
-<p>这样我们就可以根据<code>direction</code>的值来做页面的动态调整了。</p>
-<h3 id="对象字面值"><a href="#对象字面值" class="headerlink" title="对象字面值"></a>对象字面值</h3><p>可以使用JavaScript的字符串给指令传递对象字面值，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line">&lt;div v-demo=&quot;&#123;color: &apos;white&apos;, text: &apos;hello&apos;&#125;&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// JS</span><br><span class="line">  export default &#123;</span><br><span class="line">    directives: &#123;</span><br><span class="line">      demo: &#123;</span><br><span class="line">        bind: function (el, binding) &#123;</span><br><span class="line">          console.log(binding.value.color) // =&gt; &quot;white&quot;</span><br><span class="line">          console.log(binding.value.text)  // =&gt; &quot;hello&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;  </span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="noopener">自定义指令</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2207,7 +2189,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

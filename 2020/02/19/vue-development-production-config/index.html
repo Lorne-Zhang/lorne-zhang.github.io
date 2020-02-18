@@ -94,26 +94,18 @@
 
 
 
-<meta name="description" content="在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。 但当Status Code：500的时候，我们发现在Chrome下，响应信息是这样的：  在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究">
+<meta name="description" content="定义开发环境变量项目根目录下，新建.env.development文件，用于开发环境。1VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagertest/ 这里VUE_APP_前缀名称是固定的，不可以改变，这里我们以定义一个公共文件路径为例说明。 定义生产环境变量项目根目录下，新建.env.production文件，用于产生环境。1VUE_APP_P">
 <meta name="keywords" content="LorneNote">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器查看 Status Code 500 响应信息">
-<meta property="og:url" content="https://lornenote.com/2020/02/03/load-response-500-browser/index.html">
+<meta property="og:title" content="Vue系列 | 开发环境与生产环境的构建配置">
+<meta property="og:url" content="https://lornenote.com/2020/02/19/vue-development-production-config/index.html">
 <meta property="og:site_name" content="LorneNote">
-<meta property="og:description" content="在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。 但当Status Code：500的时候，我们发现在Chrome下，响应信息是这样的：  在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究">
+<meta property="og:description" content="定义开发环境变量项目根目录下，新建.env.development文件，用于开发环境。1VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagertest/ 这里VUE_APP_前缀名称是固定的，不可以改变，这里我们以定义一个公共文件路径为例说明。 定义生产环境变量项目根目录下，新建.env.production文件，用于产生环境。1VUE_APP_P">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580731775688.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580732593163.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580734080458.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580743884664.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580743949016.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744322261.png">
-<meta property="og:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580744616012.png">
-<meta property="og:updated_time" content="2020-02-09T03:06:00.240Z">
+<meta property="og:updated_time" content="2020-02-18T16:29:22.881Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器查看 Status Code 500 响应信息">
-<meta name="twitter:description" content="在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。 但当Status Code：500的时候，我们发现在Chrome下，响应信息是这样的：  在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究">
-<meta name="twitter:image" content="https://lornenote.com/2020/02/03/load-response-500-browser/1580731775688.png">
+<meta name="twitter:title" content="Vue系列 | 开发环境与生产环境的构建配置">
+<meta name="twitter:description" content="定义开发环境变量项目根目录下，新建.env.development文件，用于开发环境。1VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagertest/ 这里VUE_APP_前缀名称是固定的，不可以改变，这里我们以定义一个公共文件路径为例说明。 定义生产环境变量项目根目录下，新建.env.production文件，用于产生环境。1VUE_APP_P">
 
 
 
@@ -142,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://lornenote.com/2020/02/03/load-response-500-browser/">
+  <link rel="canonical" href="https://lornenote.com/2020/02/19/vue-development-production-config/">
 
 
 
 
 
-  <title>浏览器查看 Status Code 500 响应信息 | LorneNote</title>
+  <title>Vue系列 | 开发环境与生产环境的构建配置 | LorneNote</title>
   
 
 
@@ -261,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/02/03/load-response-500-browser/">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/02/19/vue-development-production-config/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lorne Zhang">
@@ -278,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浏览器查看 Status Code 500 响应信息</h1>
+          <h1 class="post-title" itemprop="name headline">Vue系列 | 开发环境与生产环境的构建配置</h1>
         
 
         <div class="post-meta">
@@ -290,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-03T22:22:42+08:00">
-                2020-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T00:20:07+08:00">
+                2020-02-19
               </time>
             
 
@@ -328,26 +320,14 @@
       
 
       
-        <p>在进行前端WEB页面开发的过程中，有时会碰到请求返回500的情况，这意味着服务器端内部出现了错误，一般碰到这种情况，都丢给后端开发人员来解决。他们一般要求给出请求URL、请求参数和返回值等信息。</p>
-<p>但当<code>Status Code：500</code>的时候，我们发现在Chrome下，响应信息是这样的：</p>
-<p><img src="/2020/02/03/load-response-500-browser/1580731775688.png" alt="Alt text"></p>
-<p>在Response栏，显示没有可用的响应数据。这个时候会直接告诉后端开发人员没有返回数据，让他们自己解决，没有细究Chrome无法获取响应的原因。</p>
-<p>但今天发现同样的请求在Postman下是可以获取响应信息的：<br><img src="/2020/02/03/load-response-500-browser/1580732593163.png" alt="Alt text"></p>
-<p>这些响应信息有助于后端开发人员快速排查错误，于是决定查一下问题的原因，最初的想法是看看Chrome浏览器是否能够显示500的响应信息，是不是需要设置什么东西或利用第三方插件，如果能直接查看最好，省去了<strong>Postman</strong>再走一遍请求。</p>
-<p>最先查看了一下<strong>Chrome Developers</strong>下的<strong>Network</strong>主题，似乎没有涉及相关内容。于是求助于Google搜索，看到这个解释：<a href="https://stackoverflow.com/questions/30754828/unable-to-load-response-for-500-internal-server-error-in-chrome#" target="_blank" rel="noopener">Unable to load response for 500 internal server error in chrome</a>，具体看第一个回答。大意是这是<code>Chrome</code>本身的问题，如果响应块没有正确的结束，那么Chrome就不会读取它，但是<code>Firefox</code>和<code>Safari</code>内部处理了这个问题，这就清楚了，因为服务端出现了500内部错误，响应流被中断，没有完整的响应，自然无法读取。文中给出了由后端人员来解决这个问题，这超出了我们讨论的范畴，我们先看看在Safari下的响应结果：<br><img src="/2020/02/03/load-response-500-browser/1580734080458.png" alt="Alt text"></p>
-<p>没错，的确可以查看，那么问题的答案就很清楚了。下次出现500错误，想给后端开发人员提供响应信息的时候，你有两种解决方案：在<code>Safari</code>或<code>Firefox</code>浏览器下运行程序，查看返回；或使用<code>Postman</code>等第三方请求模拟工具获取，至于<code>Chrome</code>本身是不支持查看500响应的。</p>
-<hr>
-<p><strong>后记于2020-02-03 晚上 11：26分 北京东亚创展国际（修正结论）</strong></p>
-<p>今天是春节过后第一天上班，真的是十分囧呀。本来打算把上面的这篇文章发blog而后在公众号上发一个副本后睡觉。</p>
-<p>可刚刚竟然发现测试环境下500状态码是可以查看响应的，仔细查看了一下测试环境和本地环境两者的区别，发现我之前的观察和结论是有误的：</p>
-<p>我们先来看一下本地环境下Console的打印：</p>
-<p><img src="/2020/02/03/load-response-500-browser/1580743884664.png" alt="Alt text"></p>
-<p>我们再来看一下测试环境下Console的报错打印：<br><img src="/2020/02/03/load-response-500-browser/1580743949016.png" alt="Alt text"></p>
-<p>那么测试环境和本地环境到底有什么不同呢，本地环境使用<strong>localhost:8080</strong>访问URL，由于服务器的请求URL域名和我本地的<strong>localhost</strong>域名不同，因此服务端是需要做跨域配置的。而测试环境直接使用<code>http://activity.delightful**</code>域名头访问网站，在当前数据请求URL与网站地址域名一致，因此不需要做跨域配置。</p>
-<p>在本地环境下，由于需要做跨域配置，因此请求会发送两次，一次返回204允许跨域，而后返回响应数据。而在第二次返回响应数据的时候，由于服务端发生错误，因此响应头并未配置跨域信息，所以报了跨域被阻止，</p>
-<p><img src="/2020/02/03/load-response-500-browser/1580744322261.png" alt="Alt text"><br>正常情况下应该是如下这样的，<strong>注意Response Headers栏</strong>：<br><img src="/2020/02/03/load-response-500-browser/1580744616012.png" alt="Alt text"></p>
-<p>由于跨域被阻止，自然没有返回数据，因此本机环境没有响应信息。而测试环境，不存在跨域问题，所以直接返回了500错误，并可以查看响应。</p>
-<p><strong>综上：不能查看响应的原因是本地环境下，由于请求失败，缺失跨域所需要的响应头，因此响应被浏览器拦截。因此无法查看响应。与Chrome浏览器无关。</strong></p>
+        <h3 id="定义开发环境变量"><a href="#定义开发环境变量" class="headerlink" title="定义开发环境变量"></a>定义开发环境变量</h3><p>项目根目录下，新建<code>.env.development</code>文件，用于开发环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagertest/</span><br></pre></td></tr></table></figure></p>
+<p>这里<code>VUE_APP_</code>前缀名称是固定的，不可以改变，这里我们以定义一个公共文件路径为例说明。</p>
+<h3 id="定义生产环境变量"><a href="#定义生产环境变量" class="headerlink" title="定义生产环境变量"></a>定义生产环境变量</h3><p>项目根目录下，新建<code>.env.production</code>文件，用于产生环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_PUBLIC_PATH=/data/manageplatform/mallmanagerrelease/</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用环境变量"><a href="#使用环境变量" class="headerlink" title="使用环境变量"></a>使用环境变量</h3><p>例如：我们在<code>vue.config.js</code>下使用该变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  publicPath: process.env.VUE_APP_PUBLIC_PATH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>process.env.APP_PUBLIC_PATH</code>会在项目启动时自动加载，但问题是它怎么知道使用哪个环境的路径呢，所以我们还需做如下配置。</p>
+<h3 id="配置启动命令"><a href="#配置启动命令" class="headerlink" title="配置启动命令"></a>配置启动命令</h3><p>在 <strong>package.json</strong>文件中，配置<strong>scripts</strong>启动脚本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;serve&quot;: &quot;vue-cli-service serve&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;vue-cli-service build --mode development&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;vue-cli-service build&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p><strong>npm run serve</strong>: 启动本地环境，可用于本地调试。<br><strong>npm run dev</strong>: 打包构建，这里我们指定了 <code>--mode development</code>，意味着我们在开发环境，此时<code>.env.development</code>相关配置生效。<br><strong>npm run build</strong>: 打包构建，如果没有指定<code>mode</code>，默认构建生产环境，所以我们的<code>.env.production</code>相关配置生效。当然，我们也可以手动指定 <code>--mode production</code>。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>综上，<br>对于开发环境部署，使用<code>npm run dev</code>构建版本，<br>对于生产环境部署，使用<code>npm run build</code>构建版本。</p>
 
       
     </div>
@@ -372,8 +352,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/29/minipack-module-bundler/" rel="next" title="极简Webpack | 手写打包器">
-                <i class="fa fa-chevron-left"></i> 极简Webpack | 手写打包器
+              <a href="/2020/02/03/load-response-500-browser/" rel="next" title="浏览器查看 Status Code 500 响应信息">
+                <i class="fa fa-chevron-left"></i> 浏览器查看 Status Code 500 响应信息
               </a>
             
           </div>
@@ -381,10 +361,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/19/vue-development-production-config/" rel="prev" title="Vue系列 | 开发环境与生产环境的构建配置">
-                Vue系列 | 开发环境与生产环境的构建配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -436,8 +412,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/lorne-zhang.jpg" alt="Lorne Zhang">
           <p class="site-author-name" itemprop="name">Lorne Zhang</p>
@@ -479,6 +464,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义开发环境变量"><span class="nav-number">1.</span> <span class="nav-text">定义开发环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义生产环境变量"><span class="nav-number">2.</span> <span class="nav-text">定义生产环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用环境变量"><span class="nav-number">3.</span> <span class="nav-text">使用环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置启动命令"><span class="nav-number">4.</span> <span class="nav-text">配置启动命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
