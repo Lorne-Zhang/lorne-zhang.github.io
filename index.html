@@ -254,6 +254,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/06/29/ios-text-adaptivity-image-layout/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/29/ios-text-adaptivity-image-layout/" itemprop="url">iOS | 图片上的文字自适应</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-29T13:44:53+08:00">
+                2020-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司产品需要自定义弹窗。而弹窗的背景图片是根据屏幕的宽高自动缩放的，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define ALERTVIEW_HEIGHT ([UIScreen mainScreen].bounds.size.width - 60)*1.05</span><br><span class="line">#define ALERTVIEW_WIDTH  [UIScreen mainScreen].bounds.size.width-60</span><br></pre></td></tr></table></figure></p>
+<p>而弹窗上的标题，即‘恭喜’两个字并不是图片，是写上去的，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 38, self.alertView.frame.size.width - MARGIN, 30)];</span><br></pre></td></tr></table></figure></p>
+<p>这里我给了它距离弹框顶部一个固定的间距，iPhone 6s 模拟器上效果如下：<br><img src="/2020/06/29/ios-text-adaptivity-image-layout/Simulator Screen Shot - iPhone 6s - 2020-06-29 at 10.56.30.png" alt="Alt text"></p>
+<p>以下是iPhone 11 模拟器下的效果：<br><img src="/2020/06/29/ios-text-adaptivity-image-layout/Simulator Screen Shot - iPhone 11 - 2020-06-29 at 10.59.14.png" alt="Alt text"></p>
+<p>简单点说，iPhone11下字体上移了。这个固定的尺寸不随屏幕的宽高呈现比例变化，那我们如何定义它的高度，以便标题在不同屏幕尺寸下都在中间位置呢。</p>
+<h2 id="实现动态高度"><a href="#实现动态高度" class="headerlink" title="实现动态高度"></a>实现动态高度</h2><p>此时我们引入一个计算动态高度的宏定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define getHeight(h) ((h)*([UIScreen mainScreen].bounds.size.width/414.0f))</span><br></pre></td></tr></table></figure></p>
+<p>在iPhone 11上调试一个合适的高度，这里不再是固定高度，而是使用了刚刚定义的宏动态高度<code>getHeight(40)</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(10, getHeight(40), self.alertView.frame.size.width - MARGIN, 30)];</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="/2020/06/29/ios-text-adaptivity-image-layout/Simulator Screen Shot - iPhone 11 - 2020-06-29 at 11.03.30.png" alt="Alt text"></p>
+<p>然后我们在切换回iPhone 6s 模拟器下：<br><img src="/2020/06/29/ios-text-adaptivity-image-layout/Simulator Screen Shot - iPhone 6s - 2020-06-29 at 11.21.50.png" alt="Alt text"></p>
+<p>大体一致了，类似的实现还可以定义宽度和字体：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define gotWidth(w) ((w)*([UIScreen mainScreen].bounds.size.height/896.0f))</span><br><span class="line">#define fontHeight(f) ((f)*([UIScreen mainScreen].bounds.size.width/414.0f))</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2020/06/09/cordova-create-your-first-app/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1836,159 +1965,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/10/06/webstorm-concise-introduction/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lorne Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/lorne-zhang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LorneNote">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/06/webstorm-concise-introduction/" itemprop="url">WebStorm | 一分钟入门WebStorm</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-06T10:22:34+08:00">
-                2019-10-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>WebStorm</code>是JetBranins开发的JavaScript IDE。</p>
-<p><img src="/2019/10/06/webstorm-concise-introduction/1566441231277.png" alt="Alt text"></p>
-<p>对照上图，我们依次来解释：</p>
-<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Double ⇧：搜索任何东西</span><br><span class="line">⇧⌘O：查找具体的文件名称</span><br><span class="line">⌘E：最近打开的文件</span><br><span class="line">⌘1：工程目录快捷键</span><br><span class="line">⌘↑：打开导航栏</span><br></pre></td></tr></table></figure>
-<p>以上命令配合箭头键（定位文件）+ 回车键（进入文件）来快速锁定资源位置。</p>
-<h3 id="右侧边栏"><a href="#右侧边栏" class="headerlink" title="右侧边栏"></a>右侧边栏</h3><p><strong>Project</strong>：打开工程目录，功能同<code>⌘1</code></p>
-<p><strong>Structure</strong>：展示当前文件结构（注意需要在具体文件下面才能展示，此功能在文件较大时，快速定位方法和标签位置比较方便）</p>
-<p><strong>npm</strong>：包管理器,点开后界面：</p>
-<p> <img src="/2019/10/06/webstorm-concise-introduction/1566444427277.png" alt="Alt text"></p>
-<ul>
-<li>双击<code>serve</code>启动本地项目，对应命令：<code>npm run serve</code></li>
-<li>双击<code>build</code>执行项目打包命令，对应命令：<code>npm run build</code><blockquote>
-<p>如果双击没反应，右击选择编辑菜单栏，看一下Command，Scripts，Node interpreter，Package mananger都配对了吗，如下图：<br><img src="/2019/10/06/webstorm-concise-introduction/1566444759256.png" alt="Alt text"></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="下侧边栏"><a href="#下侧边栏" class="headerlink" title="下侧边栏"></a>下侧边栏</h3><p><strong>TODO</strong>：查找代办事项</p>
-<blockquote>
-<p>在实际开发中可能经常碰到这样的情况，就是写到一半因为其他原因中断，再回来我们需要知道上次写到哪里了，或声明一些东西一会做更好的优化。我们需要声明TODO代办事项，以便以后可以一下就能找到。这个<code>TODO</code>可以使用小写<code>todo</code>。</p>
-</blockquote>
-<p>如：<br>我们在HelloWorld.vue下声明代办事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  // TODO:find a better way</span><br><span class="line">  props: &#123;</span><br><span class="line">    msg: String</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在TODO下会有如下提示，双击TODO项即可打开文件所在位置，非常方便。<br><img src="/2019/10/06/webstorm-concise-introduction/1566443308778.png" alt="Alt text"></p>
-<p><strong>Version Control</strong>：代码版本控制工具<br><img src="/2019/10/06/webstorm-concise-introduction/1566446079294.png" alt="Alt text"><br>使用GitHub，码云等代码管理工具，配置后可以在这里提交自己的代码。点击第一排列第二个小突触提交代码到对应的版本控制工具，快捷键<code>⌘K</code>。</p>
-<p><strong>Terminal</strong>：IDE下集成的命令行工具</p>
-<blockquote>
-<p>高频应用，我们在里面执行构建、打包、第三方插件安装等命令</p>
-</blockquote>
-<h3 id="文件内操作"><a href="#文件内操作" class="headerlink" title="文件内操作"></a>文件内操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">⌘F：文件内字符查找</span><br><span class="line">⌘R：执行字符替换或批量替换</span><br></pre></td></tr></table></figure>
-<h3 id="OVER"><a href="#OVER" class="headerlink" title="OVER"></a>OVER</h3><p>真的结束了吗，是的，根据80/20法则，我们并不用也没有必要一上来就了解所有的使用细节。我们需要找到那20%的高频操作，而后快速用起来，就是以上这些了。至于其他工具怎么用以及更细节的操作，以后慢慢研究吧。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2032,7 +2013,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
