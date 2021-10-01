@@ -254,6 +254,355 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/02/10/vue-style-guide-priority-b/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/10/vue-style-guide-priority-b/" itemprop="url">Vue代码规范 -- 强烈推荐篇[译]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-10T19:53:07+08:00">
+                2019-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="优先级B：强烈推荐（提高可读性）"><a href="#优先级B：强烈推荐（提高可读性）" class="headerlink" title="优先级B：强烈推荐（提高可读性）"></a>优先级B：强烈推荐（提高可读性）</h3><h4 id="组件文件"><a href="#组件文件" class="headerlink" title="组件文件"></a>组件文件</h4><p>只要有能够拼接文件的构建系统，每一个组件应该在它自己的文件里。</p>
+<p>当你需要编辑或查看怎样使用它时能够帮助你快速的发现组件。</p>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;TodoList&apos;, &#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br><span class="line">Vue.component(&apos;TodoItem&apos;, &#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - TodoList.js</span><br><span class="line">| - TodoItem.js</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">| - TodoList.vue</span><br><span class="line">| - TodoItem.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="单文件组件文件名大小写"><a href="#单文件组件文件名大小写" class="headerlink" title="单文件组件文件名大小写"></a>单文件组件文件名大小写</h4><p><a href="https://vuejs.org/v2/guide/single-file-components.html" target="_blank" rel="noopener">单文件组件</a>的文件名应该总是使用PascalCase（首字母大写的驼峰式）或总是使用kebab-case（下划线连接式）的写法。<br>PascalCase对于代码编辑器的自动完成最为友好。因为它和我们在JS(X)和模板中引用组件尽可能是一致的。然而，混用文件名可能导致在大小写不敏感的文件系统中出问题，这就是为什么kebab-case也完全是可以接收的。</p>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - mycomponent.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - myComponent.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - MyComponent.vue</span><br><span class="line">| - my-component.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="基本的组件名"><a href="#基本的组件名" class="headerlink" title="基本的组件名"></a>基本的组件名</h4><p>基本组件（也称表现的，非智能的或纯组件）应用app的特定样式和惯例应该总是有一个特定的前缀，例如：<code>Base</code>，<code>App</code>，或<code>V</code>。</p>
+<blockquote>
+<p>详解解释<br>这些组件为应用程序中的一致样式和行为奠定了基础。他们仅仅包含：</p>
+<ul>
+<li>HTML元素，</li>
+<li>其他基本组件，和</li>
+<li>第三方UI组件。</li>
+</ul>
+<p>但是他们绝对不会包含全局状态（eg：来自Vuex商店）。</p>
+<p>这些名称常常包含了他们封装的元素名（例如：<code>BaseButton</code>，<code>BaseTable</code>),除非为了某个特定的目的没有元素的存在（例如：<code>BaseIcon</code>）。如果你为更多的具体上下文构建了类似的组件，他们几乎总成充满这些组件（例如：<code>BaseButton</code>可能被用在<code>ButtonSubmit</code>）。<br>这样做的几点好处：</p>
+<ul>
+<li>当编辑器按字母顺序组织排版时，你的应用的基本组件总是被列在一起，使他们更容易识别。</li>
+<li>用于组件名称应由多个词构成，这个用法避免你去随意选择前缀来封装你的组件（e.g. <code>Mybutton</code>,<code>VueButton</code>）。</li>
+<li>用于这些组件也时常被使用，你可能想要把他们设置成全局属性而避免每次使用他们。使用相同的前缀可以让Webpack这样工作：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	var requireComponent = require.context(&quot;./src&quot;, true, /^Base[A-Z]/)</span><br><span class="line">	requireComonent.keys().forEach( function (fileName) &#123;</span><br><span class="line">	var  baseComponentConfig = requireComponent(fileName)</span><br><span class="line">	baseComponentConfig = baseComponentConfig.default || baseComponentConfig</span><br><span class="line">	var baseComponentName = baseComponentConfig.name || (</span><br><span class="line">		fileName</span><br><span class="line">			.replace(/^.+\//, &apos;&apos;)</span><br><span class="line">			.replace(/\.\w+$/, &apos;&apos;)</span><br><span class="line">		)</span><br><span class="line">		Vue.component(baseComponentName, baseComponentConfig)</span><br><span class="line">	&#125;)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - MyButton.vue</span><br><span class="line">| - VueTable.vue</span><br><span class="line">| - Icon.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - BaseButton.vue</span><br><span class="line">| - BaseTable.vue</span><br><span class="line">| - BaseIcon.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line"> | - AppButton.vue</span><br><span class="line"> | - AppTable.vue</span><br><span class="line"> | - AppIcon.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">compoennts/</span><br><span class="line">| - VButton.vue</span><br><span class="line">| - VTable.vue</span><br><span class="line">| - VIcon.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="单文件实例组件名"><a href="#单文件实例组件名" class="headerlink" title="单文件实例组件名"></a>单文件实例组件名</h4><p><strong>组件应该仅仅有一个激活实例组件以<code>The</code>前缀开头，以表示他们仅仅有一个。</strong></p>
+<p>这并不表示组件只能被用在一个单独的页面，而是在每页只能用一次。这些组件不接受任何props，因为他们是为你的app定制的，而不是他们在你的应用中的上下文。如果你发现需要添加props。这是一个好兆头，因为那意味着到现在为止它实际上是一个可以复用的组件而不是每页只能用一次。</p>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - Heading.vue</span><br><span class="line">| - MySidebar.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - TheHeading.vue</span><br><span class="line">| - TheSidebar.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="紧密耦合的组件名"><a href="#紧密耦合的组件名" class="headerlink" title="紧密耦合的组件名"></a>紧密耦合的组件名</h4><p><strong>子组件是和他们的父组件紧密耦合的，所有应该包含父组件名称作为前缀。</strong><br>如果一个组件仅仅在一个单独的父组件的上下文是有意义的，那么他们的关系应该体现在他们的名字上。由于编辑器使用按字母顺序组织文件，所有他们也能够在文件中保持这种关系。</p>
+<blockquote>
+<p><strong>详细解释</strong><br>你可能想要通过在父组件的目录下嵌套子组件的方式解决这个问题，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">components\</span><br><span class="line">| - TodoList/</span><br><span class="line">| - Item/</span><br><span class="line">	| - index.vue</span><br><span class="line">	| - Button.vue</span><br><span class="line">| - index.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>或：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - TodoList\</span><br><span class="line">	| - Item/</span><br><span class="line">		| - Button.vue</span><br><span class="line">	| - Item.vue</span><br><span class="line">  | - TodoList.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>不推荐这样做，其结果是：</p>
+<ul>
+<li>许多文件使用相似的名字，使在编辑器中快速切换文件变得困难。</li>
+<li>多层被嵌套的子目录，在编辑器的侧边栏查看组件会增加查找时间。</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - TodoList.vue</span><br><span class="line">| - TodoItem.vue</span><br><span class="line">| - TodoButton.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - SearchSidebar.vue</span><br><span class="line">| - NavigationForSearchSidebar.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - TodoList.vue</span><br><span class="line">| - TodoListItem.vue</span><br><span class="line">| - TodoListItemButton.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - SearchSidebar.vue</span><br><span class="line">| - SearchSidebarNavigation.vue</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="组件名中的单词顺序"><a href="#组件名中的单词顺序" class="headerlink" title="组件名中的单词顺序"></a>组件名中的单词顺序</h4><p><strong>组件名称应用总是以最高等级的（通常是最常用的）单词开始，以描述修改的单词结尾。</strong></p>
+<blockquote>
+<p><strong>详细解释</strong><br>你可能会惊讶：<br><strong>为什么我们强制组件名去使用较少的原生语言？</strong><br>在本土英语里，形容词和其他描述符一般出现在名词之前，有连接词的例外，例如：</p>
+<ul>
+<li>Coffee with milk</li>
+<li>Soup of the day</li>
+<li>Visitor to the museum</li>
+</ul>
+<p>如果你喜欢的话，可以定义这些包含连接符的词在组件名里，但是顺序仍然是重要的。</p>
+<p>也要注意在你的上下文中什么被认为是“最高级的”。例如，想象一个带搜索表单的app，它可能包含组件像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - ClearSearchButton.vue</span><br><span class="line">| - ExcludeFromSearchInput.vue</span><br><span class="line">| - LaunchOnStartupCheckbox.vue</span><br><span class="line">| - RunSearchButton.vue</span><br><span class="line">| - SearchInput.vue</span><br><span class="line">| - TermsCheckbox.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>你可能注意到了，它查找特定的搜索组件看起来十分的困难。现在让我们重命名组件根据这个规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - SearchButtonClear.vue</span><br><span class="line">| - SearchButtonRun.vue</span><br><span class="line">| - SearchInputExcludeGlob.vue</span><br><span class="line">| - SettingsCheckboxLaunchOnStartup.vue</span><br><span class="line">| - SettingsCheckboxTerms.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>由于编辑器使用字母组织文件，组件间的重要关系现在非常明显的看到。</p>
+<p>你可能想要使用不同的方式解决这个问题，嵌套所有搜索组件在“search“目录，而后所有的设置组件在settings目录。我们只推荐这种实现在非常大的应用里，（比如超过了100个组件），例如：</p>
+<ul>
+<li>在子目录下嵌套常常比在一个components目录下滚动要花费更多的时间。</li>
+<li>命名冲突（例如：多个<code>ButtonDelete.vue</code>组件）使代码编辑器快速定位到特定组件变的困难。</li>
+<li>重构变得困难，因为查找和替换常常不足以更新对一个移动组件的相对引用。</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - ClearSearchButton.vue</span><br><span class="line">| - ExcludeFromSearchInput.vue</span><br><span class="line">| - LanuchOnStartupCheckbox.vue</span><br><span class="line">| - RunSearchButton.vue</span><br><span class="line">| - SearchInput.vue</span><br><span class="line">| - TermsCheckbox.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">| - SearchButtonClear.vue</span><br><span class="line">| - SearchButtonRun.vue</span><br><span class="line">| - SearchInputQuery.vue</span><br><span class="line">| - SearchInputExcludeGlob.vue</span><br><span class="line">| - SettingsCheckboxTerms.vue</span><br><span class="line">| - SettingsCheckboxLaunchOnStartup.vue</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="自闭合组件"><a href="#自闭合组件" class="headerlink" title="自闭合组件"></a>自闭合组件</h4><p><strong>在<a href="https://vuejs.org/v2/guide/single-file-components.html" target="_blank" rel="noopener">单文件组件(英文)</a>、字符串模板、和<a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener">JSX(英文)</a>没有内容的组件应该是自闭合的，但是在DOM模板不要这样做。</strong></p>
+<p>自闭合组件传递的信息时不仅没有内容，而且注定没有内容。他们和书的空白页是不同的，有一个标签”这页有意留空“你的代码也会清除不需要的闭合标签。</p>
+<p>幸运的是，HTML不允许自定义的元素自闭合的-除了<a href="https://www.w3.org/TR/html/syntax.html#void-elements" target="_blank" rel="noopener">官方的“void”元素(英文)</a>。这就是为什么这个策略是可行的，当Vue的模板编译器可以在DOM之前达到模板，然后产出符合DOM规范的HTML。</p>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在单文件组件中，字符串模板，JSX --&gt;</span><br><span class="line">&lt;MyComponent&gt;&lt;/myComponent&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! --  在单文件组件，字符串模板，JSX -- &gt;</span><br><span class="line">&lt;MyComponent/&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在DOM模板 --&gt;</span><br><span class="line">&lt;my-component&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="在模板中组件名称大小写"><a href="#在模板中组件名称大小写" class="headerlink" title="在模板中组件名称大小写"></a>在模板中组件名称大小写</h4><p>在大部分项目里，组件名称应用总是使用大写开头的驼峰写法在<a href="https://vuejs.org/v2/guide/single-file-components.html" target="_blank" rel="noopener">单文件组件</a>和字符串模板里，-但在DOM模板中使用kebab-case。</p>
+<p>PascalCase比kebab-case有一些优势：</p>
+<ul>
+<li>编辑器在模板中自动完成组件名，因为PascalCase被用在JavaScript。</li>
+<li><code>&lt;MyComponent&gt;</code>比<code>&lt;my-component&gt;</code>更直观的区别于HTML元素，因为有两个不同的自身（两个大写字母），而不是只有一个（连字符）。</li>
+<li>如果你使用了任何非Vue自定义元素在你的模板中，例如一个web组件，PascalCase能够确保你的Vue组件仍然明显可见的。</li>
+</ul>
+<p>不幸的是，由于HTML不区分大小写，DOM模板必须一致使用kebab-case。</p>
+<p>也要注意如果你已经是kebab-case的重度用户，为了保证HTML惯例的一致在你所有的项目中使用同样的大小写可能比上面所列出的要更重要，在这种情况下，使用kebab-case在所有地方是可以接受的。</p>
+<blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在单文件组件和字符串模板中 --&gt;</span><br><span class="line">&lt;mycomponent/&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! --  在DOM模板 -- &gt;</span><br><span class="line">&lt;MyComponent&gt;&lt;/MyComponent&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在当文件组件和字符串模板中 --&gt;</span><br><span class="line">&lt;MyComponent/&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在DOM模板 --&gt;</span><br><span class="line">&lt;my-component&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 在任何地方 --&gt;</span><br><span class="line">&lt;my-component&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="在JS-JSX组件名大小写"><a href="#在JS-JSX组件名大小写" class="headerlink" title="在JS/JSX组件名大小写"></a>在JS/JSX组件名大小写</h4><p><strong>在JS/JSX中应该总是使用首字母大写的驼峰写法，虽<br>然他们可能使用连字符kebab-case的写法，但这仅仅用于一些通过<code>Vue.component</code>全局组件注册的简单应用程序中。</strong></p>
+<blockquote>
+<p><strong>详细解释</strong><br>在JavaScript中，PascalCase（驼峰）的写法对于类和原型构造器是惯例 –基本上，任何东西都拥有实例。Vue组件也是实例，所以它使用PascalCase的写法是有意义的。作为一个额外的好处，在JSX（和模板中）使用PascalCase写法可以使读者更好的区分组件和HTML元素的不同。</p>
+<p>然而，对与使用<code>Vue.component</code>定义的全局组件来说，我们推荐使用kebab-case（下划线连接）的写法代替。因为：</p>
+<ul>
+<li>全局组件在JavaScript中引用比较少见，所以遵循这个惯例对应JavaScript来说意义不大。</li>
+<li>这些应用内总是包含许多内在的DOM模板，使用kebab-case是必须的。</li>
+</ul>
+</blockquote>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;myComponent&apos;, &#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import myComponent from &apos;./MyComponent.vue&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">	name: &apos;myComponent&apos;,</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">	name: &apos;my-component&apos;,</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;MyComponent&apos;, &#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;my-component&apos;,&#123;</span><br><span class="line">	// ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import MyComponent from &apos;./MyComponent.vue&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">	name: &apos;MyComponent&apos;,</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整单词的组件名"><a href="#完整单词的组件名" class="headerlink" title="完整单词的组件名"></a>完整单词的组件名</h4><p><strong>组件名称应该尽量用完整的单词而不是缩写</strong><br>编辑器里的自动完成会使我们写长词花费的时间非常少，而且完整的单词会使释义非常清晰。尤其是不常用的缩写，应该尽量避免。<br><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- SdSettings.vue</span><br><span class="line">|- UProfOpts.vue</span><br></pre></td></tr></table></figure></p>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- StudentDashboardSettings.vue</span><br><span class="line">|- UserProfileOptions.vue</span><br></pre></td></tr></table></figure></p>
+<h4 id="Prop名称的大小写"><a href="#Prop名称的大小写" class="headerlink" title="Prop名称的大小写"></a>Prop名称的大小写</h4><p><strong>Prop的名称在声明期间应该总是使用cameCase（首字母小写的驼峰式），但是kebab-case用在模板和<a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener">JSX</a>。</strong></p>
+<p>我们需要简单的遵守每一种语言的惯例。在JavaScript中，camelCase更常用，在HTML，是kebab-case。</p>
+<p><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// In JS</span><br><span class="line">props: &#123;</span><br><span class="line">	&apos;greeting-text&apos;:String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// In HTML</span><br><span class="line">&lt;WelcomeMesssge greetingText=&quot;hi&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// In JS</span><br><span class="line">props: &#123;</span><br><span class="line">	greetingText: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// In HTML</span><br><span class="line">&lt;WelcomeMessage greeting-text=&quot;hi&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="多个attribute元素"><a href="#多个attribute元素" class="headerlink" title="多个attribute元素"></a>多个attribute元素</h4><p><strong>使用多个attributes的元素应该分为多行，每行使用一个attribute。</strong></p>
+<p>在JavaScript，用多行切分对象的多个properties被认为是一种好习惯，因为易读。我们的模板和<a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener">JSX</a>应该使用相同的方式。<br><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;https://vuejs.org/images/logo.png&quot; alt=&quot;Vue Logo&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyComponent foo=&quot;a&quot; bar=&quot;c&quot; baz=&quot;c&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img</span><br><span class="line">	src=&quot;https://vuejs.org/images/logo.png&quot;</span><br><span class="line">	alt=&quot;Vue Logo&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyComponent</span><br><span class="line">	foo=&quot;a&quot;</span><br><span class="line">	bar=&quot;b&quot;</span><br><span class="line">	baz=&quot;c&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="在模板中的简单表达式"><a href="#在模板中的简单表达式" class="headerlink" title="在模板中的简单表达式"></a>在模板中的简单表达式</h4><p><strong>组件模板应该仅仅包含简单的表达式，多个复杂的表达式应该使用计算属性或方法重构。</strong></p>
+<p>模板中的复杂表达式使他们不那么具有声明性。我们应该集中描述会出现什么，而不是我们怎样计算它的值。计算属性和方法也允许我们代码复用。<br><strong>Bad</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// In HTML</span><br><span class="line">&#123;&#123;</span><br><span class="line">	fullName.split(&apos; &apos;).map(function (word)&#123;</span><br><span class="line">		return word[0].toUpperCase() + word.slice(1)</span><br><span class="line">	&#125;).join(&apos; &apos;)</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Good</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// In HTML</span><br><span class="line">&lt;!-- In a template&gt;</span><br><span class="line">&#123;&#123; normallizedFullName &#125;&#125;</span><br><span class="line"></span><br><span class="line">// In JavaScript</span><br><span class="line">// The complex expression has been moved to a computed properties</span><br><span class="line">computed: &#123;</span><br><span class="line">	normalizedFullName: function() &#123;</span><br><span class="line">		return this.split(&apos; &apos;).map(function (word) &#123;</span><br><span class="line">			return word[0].toUpperCase() + word.slice(1)</span><br><span class="line">			&#125;).join(&apos; &apos;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="简单的计算属性"><a href="#简单的计算属性" class="headerlink" title="简单的计算属性"></a>简单的计算属性</h4><p><strong>复杂的计算属性应该尽可能的分割为多个简单的计算属性。</strong></p>
+<blockquote>
+<p><strong>详细解释</strong><br>简单的，命名良好的计算属性是这样的：</p>
+<ul>
+<li><strong>容易测试</strong><br>当每一个计算属性包含仅仅一个简单表达式的时候，使用比较少的依赖，<br>编写测试来确认他们可以正确工作要容易的多。</li>
+<li><strong>容易阅读</strong><br>特定的计算属性集中于你名字所描述的每一个值，即使他们不可以复用。<br>这使得其他开发者（和未来的你）能够更集中于关心和计算你的代码发生<br>了什么。</li>
+<li><strong>更能适应需求的改变</strong><br>被命名的任何值都可能是对视图有用的，例如，我们可能要去显示一条消<br>息来告诉用户他们存了多少钱。我们也可能打算去计算销售税，但是可能<br>分开显示他们，而不是作为最终价格的一部分。</li>
+</ul>
+<p>小的，专注于计算属性使信息怎样被使用的假设条件更少，所以当需求改变时减少重构。</p>
+</blockquote>
+<p><strong>Bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// In JS</span><br><span class="line">computed: &#123;</span><br><span class="line">	price: function() &#123;</span><br><span class="line">		var basePrice = this.manufactureCost / (1 - this.profitMargin)</span><br><span class="line">		return (</span><br><span class="line">			basePrice -</span><br><span class="line">			basePrice * (this.discountPercent || 0)</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// In JS</span><br><span class="line">computed: &#123;</span><br><span class="line">	basePrice: function () &#123;</span><br><span class="line">		return this.manufactueCost / (1 - this.profitMargin)</span><br><span class="line">	&#125;,</span><br><span class="line">	discount: function () &#123;</span><br><span class="line">		return this.basePrice * (this.discountPercent || 0)</span><br><span class="line">	&#125;,</span><br><span class="line">	finalPrice: function() &#123;</span><br><span class="line">		return this.basePrice - this.discount</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="带引号的特性值"><a href="#带引号的特性值" class="headerlink" title="带引号的特性值"></a>带引号的特性值</h4><p><strong>非空HTML特性值应该总是在引号内部（单引号或双引号，在JS里不用的那个）</strong></p>
+<p>在HTML中不带空格的特性值是可以没有引号的，但这里鼓励大家<em>不写</em>空格，使特性值的可读性变差。</p>
+<p><strong>Bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=text&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;AppSidebar :style=&#123;width:sidebarWidth+&apos;px&apos;&#125;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;AppSidebar :style=&quot;&#123; width: sidebarWidth + &apos;px&apos; &#125;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="指令缩写"><a href="#指令缩写" class="headerlink" title="指令缩写"></a>指令缩写</h4><p><strong>指令缩写（<code>：</code>for <code>v-bind：</code> 和 <code>@</code> for <code>v-on:</code>）应该总是使用或从不使用。</strong></p>
+<p><strong>Bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	v-bind:value=&quot;newTodoText&quot;</span><br><span class="line">	:placeholder=&quot;newTodoINstructions&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	v-on:input=&quot;onInput&quot;</span><br><span class="line">	@focus=&quot;onFocus&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	:value=&quot;newTodoText&quot;</span><br><span class="line">	:placeholder=&quot;newTodoInstructions&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	v-bind:value=&quot;newTodoText&quot;</span><br><span class="line">	v-bind:placeholder=&quot;newTodoInstructions&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	@input=&quot;onInput&quot;</span><br><span class="line">	@focus=&quot;onFocus&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">	v-on:input=&quot;onInput&quot;</span><br><span class="line">	v-on:focus=&quot;onFocus&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原文：<a href="https://vuejs.org/v2/style-guide/#Priority-B-Rules-Strongly-Recommended-Improving-Readability" target="_blank" rel="noopener">Priority B Rules: Strong Recommended(Improving Readalibity)(英)</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/02/07/build-simple-vue-project/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -681,7 +1030,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
