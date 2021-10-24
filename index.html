@@ -254,6 +254,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2021/10/24/web-project-platform.js-not-found /">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lorne Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lorne-zhang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LorneNote">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/10/24/web-project-platform.js-not-found /" itemprop="url">Web Project Set Up | Platform.js 无法下载</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-24T19:52:58+08:00">
+                2021-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>构建环境：<br>macOS 10.15.7</p>
+<p>vs code 1.60.2</p>
+</blockquote>
+<p><strong>报错</strong>：PhantomJS not found on PATH<br><strong>下载时会提示</strong>：saving to ../var/folders/…/   phantomjs-2.1.1-macosx.zip</p>
+<ol>
+<li><p><strong>重点是：var/folders这个文件在哪里？</strong><br>其实这是个隐藏文件，在磁盘的根目录，和Library、Applications 文件夹在同一层次。需要先显示隐藏文件，然后按图索骥即可。</p>
+</li>
+<li><p>找到文件夹后，做第二件事，下载时会在后台提示一个下载目录：<strong>https//github.com…/   phantomjs-2.1.1-macosx.zip</strong><br>打开这个链接，直接下载zip文件，放到刚刚那个路径文件夹即可。</p>
+</li>
+<li><p>最后一步，再次执行npm install即可。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lornenote.com/2021/10/01/ios-simulator-safari-web-debug-issue/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1467,311 +1599,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lornenote.com/2019/11/23/nvm-npm-introduction /">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lorne Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/lorne-zhang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LorneNote">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/23/nvm-npm-introduction /" itemprop="url">nvm & npm 使用教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-23T14:13:48+08:00">
-                2019-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p>这里推荐使用nvm进行node的版本管理，进行多版本切换比较方便。</p>
-<h3 id="What-是什么"><a href="#What-是什么" class="headerlink" title="What | 是什么"></a>What | 是什么</h3><p>node version manager – node版本管理工具,可以同时切换node的多个版本在本地运行。</p>
-<h3 id="How-如何使用"><a href="#How-如何使用" class="headerlink" title="How | 如何使用"></a>How | 如何使用</h3><p><strong>1.安装nvm</strong><br>以curl为例,打开终端，复制粘贴如下命令后，按回车键等待安装完成即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.3/install.sh | bash</span><br></pre></td></tr></table></figure></p>
-<p><strong>2.安装node.js</strong><br>使用<code>nvm install &lt;version&gt; [&lt;arch&gt;]</code>命令下载需要的版本。<code>arch</code>参数表示系统位数，默认是64位，如果是32位操作系统，需要执行命令：<code>nvm install 10.0.1 32</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install 10.0.1</span><br></pre></td></tr></table></figure></p>
-<p><strong>3.使用nvm管理node版本</strong></p>
-<p><strong>使用特定node版本</strong><br>执行<code>nvm use &lt;version&gt; [&lt;arch&gt;]</code> 命令开始使用特定版本。比如：<code>nvm use 6.9.0</code>或者<code>nvm use 6.9.0 32</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use 6.9.0</span><br></pre></td></tr></table></figure></p>
-<p><strong>切换node使用版本</strong><br>刚刚下载了node 6.9.0版本并且成功使用，现在我们下载一个6.10.3版本，然后切换并使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use 6.9.0</span><br><span class="line">$ nvm install 6.10.3</span><br><span class="line">$ nvm use 6.10.3</span><br></pre></td></tr></table></figure></p>
-<p>参考：<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm官网</a><br><a href="https://www.jianshu.com/p/d0e0935b150a" target="_blank" rel="noopener">nvm的介绍及使用</a><br><a href="https://riptutorial.com/node-js/example/9545/install-nvm-on-mac-osx" target="_blank" rel="noopener">Install nvm on Mac OSX</a></p>
-<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><h3 id="What-是什么-1"><a href="#What-是什么-1" class="headerlink" title="What | 是什么"></a>What | 是什么</h3><p>npm有几重含义，npm是世界最大的软件仓库，仓库地址为：<a href="https://www.npmjs.com" target="_blank" rel="noopener">https://www.npmjs.com</a>，同时，npm是node的模块管理器，全称node version manager。</p>
-<p>作为软件仓库，它由三部分构成：</p>
-<ul>
-<li>网站：发现包、访问和管理软件包</li>
-<li>CLI：开发者与npm交互的方式</li>
-<li>注册表：JavaScript代码公共数据库和元信息</li>
-</ul>
-<h3 id="How-如何使用-1"><a href="#How-如何使用-1" class="headerlink" title="How | 如何使用"></a>How | 如何使用</h3><h4 id="下载和安装Node-js和npm"><a href="#下载和安装Node-js和npm" class="headerlink" title="下载和安装Node.js和npm"></a>下载和安装Node.js和npm</h4><p>为了可以发布和安装包，我们需要一个Node版本管理器，官方建议使用Node version manager去安装Node.js和npm。</p>
-<p><strong>使用nvm安装Node.js和npm</strong><br>nvm可以在系统安装和切换多个Node.js和npm版本，来确保它们可以在不同的版本中使用。</p>
-<ul>
-<li><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm</a></li>
-<li><a href="https://github.com/tj/n" target="_blank" rel="noopener">n</a></li>
-</ul>
-<p>前面我们已经介绍过nvm的安装和使用。</p>
-<p><strong>下载最新版本的npm</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ [sudo] npm install npm -g</span><br></pre></td></tr></table></figure></p>
-<p><strong>检查npm和Node.js的版本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure></p>
-<p><strong>npm CLI 版本</strong><br>npm有两个版本：<br>稳定版<code>lastest release</code> 和预发布版 <code>next release</code></p>
-<p>安装Node.js的时候npm会被自动安装，然而npm比Node.js的发布要频繁，安装最新稳定版：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install npm@lastest -g</span><br></pre></td></tr></table></figure></p>
-<p>安装预发布版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install npm@next -g</span><br></pre></td></tr></table></figure></p>
-<p>不一定安装成功，取决于开发周期，所以可能仍然安装的是稳定版。</p>
-<h4 id="使用npm安装模块"><a href="#使用npm安装模块" class="headerlink" title="使用npm安装模块"></a>使用npm安装模块</h4><p>因为有了npm，只需要一条命令，就能安装别人写好的模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
-<p>安装<code>package.json</code>文件内的依赖模块到<code>node_modules</code>目录。</p>
-<p>如果想要安装某个特定的模块，使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;packageName&gt;</span><br></pre></td></tr></table></figure></p>
-<p>安装前，<code>npm install</code> 会检查<code>node_modules</code>目录之中是否已经存在指定模块。如果存在，就不再重新安装了，即使远程仓库有一个新版本，也是如此。</p>
-<p>如果你希望，一个模块不管是否安装过，npm都强制重新安装，可以使用<code>-f</code>或<code>--force</code>参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;packageName&gt; --force</span><br></pre></td></tr></table></figure></p>
-<h4 id="包和模块介绍"><a href="#包和模块介绍" class="headerlink" title="包和模块介绍"></a>包和模块介绍</h4><p>软件包和他们的元信息存放在npm的注册表里，<br>模块是<code>node_modules</code>目录中可以由Node.js require()函数加载的任何文件或目录。</p>
-<p><strong>关于贡献包到注册表的语意版本控制</strong><br>语义化版本规格是一套规范，来帮助其他开发者理解你代码的变动程度。</p>
-<p>它以<code>1.0.0</code>作为新版的开始。</p>
-<table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>代码状态</th>
-<th>规则</th>
-<th>版本样例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>新品</td>
-<td>第一次发布</td>
-<td>1.0.0开始</td>
-<td>1.0.0</td>
-</tr>
-<tr>
-<td>补丁发布</td>
-<td>向后兼容bug修复</td>
-<td>增加第三个数字</td>
-<td>1.0.1</td>
-</tr>
-<tr>
-<td>小版本</td>
-<td>向后兼容新功能</td>
-<td>增长中间的数字并重置最后一个数字为0</td>
-<td>1.1.0</td>
-</tr>
-<tr>
-<td>主要发布</td>
-<td>改变破坏了向后兼容</td>
-<td>增长第一个数字并且将中间和最后一个数字重置为0</td>
-<td>2.0.0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>你可以使用语义版本去指定你包能接受的更新类型</strong></p>
-<p>你可以从依赖你包的<code>package.json</code>文件里指定你的包的更新类型。</p>
-<p>比如，为了指定可以接受的版本范围上限是1.0.4，使用如下语法：</p>
-<ul>
-<li>补丁发布： 1.0 或1.0.x 或 ~1.0.4</li>
-<li>小版本：1 或 1.x 或 ^1.0.4</li>
-<li>主要发布： * 或 x</li>
-</ul>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">	&quot;my_dep&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">	&quot;another_dep&quot;: &quot;~2.2.0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对于语意版本语法的更多信息，看<a href="https://semver.npmjs.com/" target="_blank" rel="noopener">npm 语意化版本计算</a></p>
-<h2 id="从注册表获取包"><a href="#从注册表获取包" class="headerlink" title="从注册表获取包"></a>从注册表获取包</h2><h3 id="包的搜索和下载"><a href="#包的搜索和下载" class="headerlink" title="包的搜索和下载"></a>包的搜索和下载</h3><p>打开<a href="https://www.npmjs.com" target="_blank" rel="noopener">npm官网</a>搜索框搜索对应包的名称即可，搜索完对应的包名后，左边有四个筛选条件：</p>
-<p><code>Popularity</code>：流行度，表示该包多少次被下载，代表多少人受益了。<br><code>Quality</code>：品质，包含了一些注意事项如果存在README文件，如稳定性，测试、最新依赖、自定义网站，代码复杂性<br><code>Maintenance</code>：维护性，从开发人员对包的关注度来排名，例如：经常维护可能会更好。<br><code>Optimal</code>：理想的，可以理解为前三项的综合评估，一般用这个标准就可以，这也是默认排序</p>
-<p><strong>安装一个没有作用域的包</strong></p>
-<p>这类包总是公共的，可以被任何人下载、安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;pageage_name&gt;</span><br></pre></td></tr></table></figure></p>
-<p>在当前目录创建node_modules(如果没有)并且下载该包到当前目录。就是在自己的项目里依赖自己的包，这也是npm install的默认行为。</p>
-<blockquote>
-<p>注意：<br>如果没有本地没有package.json文件，会安装最新版本，否则，安装package.json文件中声明的满足<a href="https://docs.npmjs.com/about-semantic-versioning" target="_blank" rel="noopener">语意规则</a>的最新版。</p>
-</blockquote>
-<p><strong>安装一个作用域公共包</strong><br>作用域包的下载需要引用一下作用域的名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @scope/package-name</span><br></pre></td></tr></table></figure></p>
-<p><strong>测试包的安装</strong><br>在你的安装目录下检查是否有node_modules包存在，这里包含了你安装包的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls node_moudules</span><br></pre></td></tr></table></figure></p>
-<p><strong>使用dist-tags安装包</strong><br>默认是安装包的最新版，可以使用<strong>npm install &lt;package_name&gt;@<tag></tag></strong>覆写这个行为，比如安装<code>example-package</code>被标记为<code>beta</code>的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install example-package@beta</span><br></pre></td></tr></table></figure></p>
-<h3 id="下载安装全局包"><a href="#下载安装全局包" class="headerlink" title="下载安装全局包"></a>下载安装全局包</h3><p>顾名思义，全局包的作用域是整个电脑系统级别的。即可以在各个项目中使用它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g &lt;package_name&gt;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意<br>如果npm的版本大于等于5.2,建议使用npx来安装全局包<br>关于npx，看这篇文章<a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b" target="_blank" rel="noopener">npx介绍</a></p>
-</blockquote>
-<p>如果全局安装出现了EACCES权限错误，推荐重新安装npm，或手动改变npm的默认目录，具体查看<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener">解决全局安装包EACCES权限错误</a></p>
-<h3 id="下载包的更新"><a href="#下载包的更新" class="headerlink" title="下载包的更新"></a>下载包的更新</h3><p><strong>更新本地安装包</strong></p>
-<ol>
-<li><p>找到项目根目录确保包含package.json文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd /path/to/project</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行更新命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm update</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装。<br>单独更新某一个包，使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm update &lt;packageName&gt;</span><br></pre></td></tr></table></figure></p>
-<ol start="3">
-<li>测试更新，不应该有任何输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm outdated</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>更新全局安装包</strong></p>
-<p>决定哪个全局包需要更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm outdated -g --depth=0</span><br></pre></td></tr></table></figure></p>
-<p>更新某一个全局包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm update -g &lt;package_name&gt;</span><br></pre></td></tr></table></figure></p>
-<p>更新所有全局包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm update -g</span><br></pre></td></tr></table></figure></p>
-<h3 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h3><p><code>npm update</code>命令怎么知道每个模块的最新版本呢？</p>
-<p>答案是npm模块仓库提供了一个查询服务，叫做<code>registry</code>。以npmjs.com为例，它的查询服务地址是<code>https://registry.npmjs.org/</code>。</p>
-<p>这个网址后面跟上模块名，就会得到一个JSON对象，里面是该模块的所有版本信息。比如，访问<code>https://registry.npmjs.org/react</code>，就会看到react模块所有版本的信息。</p>
-<p>它跟下面命令的效果是一样的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ npm view react</span><br><span class="line"></span><br><span class="line">// npm view 的别名</span><br><span class="line">$ npm info react</span><br><span class="line">$ npm show react</span><br><span class="line">$ npm v react</span><br></pre></td></tr></table></figure></p>
-<p><code>registry</code>网址的模块名后面，还可以跟上版本号或者标签，用来查询某个具体版本的信息。比如，访问 <code>https://registry.npmjs.org/react/v0.14.6</code>，就可以看到React的0.14.6版。</p>
-<p>返回的JSON对象里面，有一个<code>dist.tarball</code>属性，是该版本的压缩包的网址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">.tarball https://registry.npm.taobao.org/element/download/element-0.1.4.tgz</span><br><span class="line">.shasum: 1642279061328a574a692e0e5184e62c180a6685</span><br></pre></td></tr></table></figure>
-<p>到这个网址下载压缩包，在本地解压，就得到了模块的代码。<code>npm install</code>和<code>npm update</code>命令，都是通过这种方式安装模块的。</p>
-<h2 id="包和依赖的卸载"><a href="#包和依赖的卸载" class="headerlink" title="包和依赖的卸载"></a>包和依赖的卸载</h2><h3 id="卸载本地包"><a href="#卸载本地包" class="headerlink" title="卸载本地包"></a>卸载本地包</h3><p><strong>从node_modules目录删除本地包</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 没有作用域的包</span><br><span class="line">npm uninstall &lt;package_name&gt;</span><br><span class="line">// 包含作用域的包</span><br><span class="line">npm uninstall &lt;@scope/package_name&gt;</span><br></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall lodash</span><br></pre></td></tr></table></figure></p>
-<p><strong>从package.json依赖删除本地包</strong><br>从package.json的依赖里删除包，使用 –save标志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 非作用域包</span><br><span class="line">npm uninstall --save &lt;package_name&gt;</span><br><span class="line">// 作用域包</span><br><span class="line">npm uninstall --save &lt;@scope/package_name&gt;</span><br></pre></td></tr></table></figure></p>
-<p>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall --save lodash</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p><strong>注意</strong><br>如果安装包作为一个“devDependency”(i.e. 用 –save-dev)，使用 –save-dev 去卸载它： npm uninstall –save-dev package_name</p>
-</blockquote>
-<p><strong>删除确认</strong><br>查看包是否已删除</p>
-<ul>
-<li>(OS X): <code>ls node_modules</code></li>
-</ul>
-<h3 id="卸载全局包"><a href="#卸载全局包" class="headerlink" title="卸载全局包"></a>卸载全局包</h3><p>需要加一个g标志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 非作用域包</span><br><span class="line">npm uninstall -g &lt;package_name&gt;</span><br><span class="line">// 作用域包</span><br><span class="line">npm uninstall -g &lt;@scope/package_name&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>我们可以在安装包的使用生成一个debug.log文件，该文件会在安装失败的时候生成，帮我们排查错误，如果需要生成这个文件，安装包时，使用如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --timing</span><br></pre></td></tr></table></figure></p>
-<p>debug.log文件位于.npm目录。可以使用<code>npm config get cache</code>发现这个目录。</p>
-<h3 id="npm-设置淘宝镜像"><a href="#npm-设置淘宝镜像" class="headerlink" title="npm 设置淘宝镜像"></a>npm 设置淘宝镜像</h3><p>参考：<a href="https://www.cnblogs.com/zzp5980/p/7676344.html" target="_blank" rel="noopener">如果npm太慢，设置淘宝npm镜像使用方法</a></p>
-<p>因为npm服务器在国外，如果觉得慢，可以换成<a href="http://npm.taobao.org" target="_blank" rel="noopener">淘宝NPM镜像</a></p>
-<p>将npm的registry设置为淘宝的镜像源,以下为几种常用方法：</p>
-<ol>
-<li><p>临时使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --registry https://registry.npm.taobao.org install express</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>持久使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>回复原地址使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure></p>
-<p>配置成功后验证：<br><strong>npm config get registry</strong> 或 <strong>npm info express</strong></p>
-<ol start="3">
-<li>通过cnpm使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>使用样例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install express</span><br></pre></td></tr></table></figure></p>
-<h3 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h3><p><code>npm install</code>或<code>npm update</code>命令，从registry下载压缩包之后，都存放在本地缓存目录。</p>
-<p>这个缓存目录，在Linux或Mac默认是用户主目录下的<code>.npm</code>目录，在Windows默认是<code>%AppData%/npm-cache</code>。通过配置命令，可以查看这个目录的具体位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get cache</span><br><span class="line">/Users/zhangfeilong/.npm</span><br></pre></td></tr></table></figure>
-<p>你最好浏览一下这个目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls ~/.npm</span><br></pre></td></tr></table></figure></p>
-<p>可以使用如下命令查看该目录下内存大小:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh *</span><br></pre></td></tr></table></figure></p>
-<p>.npm目录存放着大量文件，清空它的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf ~/.npm/*</span><br><span class="line"># 或者</span><br><span class="line">$ npm cache clean</span><br></pre></td></tr></table></figure></p>
-<h3 id="模块的安装过程"><a href="#模块的安装过程" class="headerlink" title="模块的安装过程"></a>模块的安装过程</h3><p>总结一下，Node模块的安装过程是这样的:</p>
-<ol>
-<li>发出npm install命令</li>
-<li>npm向registry查询压缩包的网址</li>
-<li>下载压缩包，存放在~/.npm目录</li>
-<li>解压压缩包到当前目录的node_modules目录</li>
-</ol>
-<p>注意，一个模块安装以后，本地其实保存了两份。一份是 <code>~/.npm</code>目录下的压缩包，另一份是<code>node_modules</code>目录下解压后的代码。</p>
-<p>但是，运行<strong>npm insall</strong>的时候，只会检查<strong>node_modules</strong>目录，而不会检查<code>~/.npm</code>目录。也就是说，如果该模块在~/.npm下有压缩包，但是没有安装在<code>node_modules</code>目录中，npm依然会从远程仓库下载一次新的压缩包。</p>
-<p>这种行为固然可以保证总是取得最新的代码，但有时并不是我们想要的。最大的问题是，它会极大的影响安装速度。即使某个模块的压缩包就在缓存目录中，也要去远程仓库下载，这怎么可能不慢呢？</p>
-<p>另外，有些场合没有网络（比如飞机上），但是你想安装的模块，明明就在缓存目录之中，这时也无法安装。</p>
-<h3 id="–cache-min参数"><a href="#–cache-min参数" class="headerlink" title="–cache-min参数"></a>–cache-min参数</h3><p>为了解决这些问题，npm提供了一个 <code>--cache-min</code>参数，用于从缓存目录安装模块。</p>
-<p><code>--cache-min</code>参数指定一个时间（单位为分钟），只有超过这个时间的模块，才会从<code>registry</code>下载。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --cache-min 99999 &lt;package-name&gt;</span><br></pre></td></tr></table></figure></p>
-<p>上面命令指定，只有超过99999分钟的模块，才从registry下载。实际上就是指定，所有模块从缓存安装，这样就大大加快了下载速度。</p>
-<p>它还有另一种写法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --cache-min Infinity &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
-<p>但是，这并不等于离线模式，这是<a href="https://github.com/npm/npm/issues/2568#issuecomment-172430897" target="_blank" rel="noopener">仍然需要</a>网络连接。因为现在的<code>--cache-min</code>实现有一些问题。</p>
-<blockquote>
-<p>(1) 如果指定模块不在缓存目录，那么npm会连接registry，下载最新版。这没有问题，但是如果指定模块在缓存目录之中，npm也会<a href="https://github.com/npm/npm/issues/2568#issuecomment-171472949" target="_blank" rel="noopener">连接registry</a>，发出指定模块的etag，服务器返回状态码304，表示不需要重新下载压缩包。<br>(2) 如果某个模块已经在缓存之中，但是版本低于要求，npm会<a href="https://github.com/npm/npm/issues/8581" target="_blank" rel="noopener">直接报错</a>,而不是去registry下载最新版本。</p>
-</blockquote>
-<p>npm团队<a href="https://github.com/npm/npm/issues/2568#issuecomment-53077253" target="_blank" rel="noopener">知道</a>存在这些问题，正在<a href="https://github.com/npm/npm/milestones/cache%20rewrite" target="_blank" rel="noopener">重写cache</a>。并且，将来也会提供一个<code>--offline</code>参数，使用npm可以在离线情况下使用。</p>
-<p>不过，这些改进没有日程表。所以，当前使用 <code>--cache-min</code>改进安装速度，是有问题的。</p>
-<hr>
-<p>参考：<br><a href="http://www.ruanyifeng.com/blog/2016/01/npm-install.html" target="_blank" rel="noopener">npm模块安装机制简介</a><br><a href="https://docs.npmjs.com/" target="_blank" rel="noopener">npm官网</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1820,7 +1647,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
